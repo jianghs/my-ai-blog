@@ -225,6 +225,46 @@
             flex: 1;
         }
 
+        /* 分页导航样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .pagination-button {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination-button.active {
+            background-color: #0077cc;
+            color: white;
+            border-color: #0077cc;
+        }
+
+        .pagination-button:disabled {
+            background-color: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            color: #666;
+            font-size: 14px;
+        }
+
         /* 分类页面特有样式 */
         .page-title {
             font-size: 24px;
@@ -669,6 +709,17 @@
             </section>
 
             <!-- 更多分类可以按照相同的模式添加 -->
+
+            <!-- 分页导航 -->
+            <div class="pagination">
+                <button class="pagination-button" disabled>上一页</button>
+                <button class="pagination-button active">1</button>
+                <button class="pagination-button">2</button>
+                <button class="pagination-button">3</button>
+                <span class="pagination-info">...</span>
+                <button class="pagination-button">8</button>
+                <button class="pagination-button">下一页</button>
+            </div>
         </main>
 
         <!-- 右侧边栏 -->
