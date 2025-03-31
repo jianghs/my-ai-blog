@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +45,7 @@
             background-color: #2e3846;
             color: white;
             padding: 10px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -113,181 +114,24 @@
         /* 主内容区样式 */
         .main-content {
             display: flex;
-            margin-top: 20px;
+            margin-top: 30px;
             margin-bottom: 40px;
         }
 
-        /* 左侧边栏样式 */
-        .sidebar-left {
-            width: 250px;
-            margin-right: 20px;
-        }
-
-        .profile-card {
-            background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: block;
-            object-fit: cover;
-            background-color: #e0e0e0;
-        }
-
-        .profile-name {
-            font-size: 18px;
+        /* 页面标题 */
+        .page-title {
+            font-size: 28px;
             font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 25px;
+            color: #333;
         }
 
-        .profile-bio {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .profile-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 15px;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .profile-links {
-            display: flex;
-            justify-content: center;
-        }
-
-        .profile-links a {
-            margin: 0 10px;
-            font-size: 14px;
-        }
-
-        .category-card {
-            background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .category-list li {
-            margin-bottom: 10px;
-        }
-
-        .category-list a {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .category-count {
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            padding: 2px 8px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* 中间内容区样式 */
+        /* 文章内容区样式 */
         .content {
             flex: 1;
         }
 
-        /* 文章列表页面特有样式 */
-        .page-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .articles-filter {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            background-color: white;
-            border-radius: 5px;
-            padding: 15px 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .filter-options {
-            display: flex;
-        }
-
-        .filter-option {
-            margin-right: 15px;
-            font-size: 14px;
-            color: #666;
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-
-        .filter-option:hover {
-            color: #0077cc;
-        }
-
-        .filter-option.active {
-            background-color: #0077cc;
-            color: white;
-        }
-
-        .sort-options {
-            display: flex;
-            align-items: center;
-        }
-
-        .sort-label {
-            font-size: 14px;
-            color: #666;
-            margin-right: 10px;
-        }
-
-        .sort-select {
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            font-size: 14px;
-            color: #333;
-            outline: none;
-        }
-
+        /* 文章列表样式 */
         .article-list {
             margin-bottom: 30px;
         }
@@ -297,27 +141,19 @@
             border-radius: 5px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .article-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .article-title {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 10px;
-        }
-
-        .article-title a {
-            color: #333;
-        }
-
-        .article-title a:hover {
-            color: #0077cc;
         }
 
         .article-meta {
@@ -331,13 +167,19 @@
         .article-meta span {
             margin-right: 15px;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .article-meta span i {
+            margin-right: 5px;
+            font-size: 14px;
         }
 
         .article-summary {
             margin-bottom: 15px;
-            font-size: 15px;
-            color: #555;
-            line-height: 1.6;
+            line-height: 1.7;
+            color: #444;
         }
 
         .article-tags {
@@ -354,73 +196,163 @@
             margin-bottom: 8px;
             font-size: 12px;
             color: #666;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .tag:hover {
             background-color: #e0e0e0;
+            color: #333;
         }
 
         .article-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
         }
 
         .article-stats {
             display: flex;
+            flex-wrap: wrap;
         }
 
         .article-stats span {
             margin-right: 15px;
+            margin-bottom: 5px;
+            font-size: 13px;
             color: #666;
+            display: flex;
+            align-items: center;
         }
 
         .read-more {
-            color: #0077cc;
+            font-size: 14px;
             font-weight: 500;
+            display: inline-flex;
+            align-items: center;
         }
 
+        .read-more:after {
+            content: "→";
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover:after {
+            transform: translateX(3px);
+        }
+
+        /* 筛选工具栏 */
+        .filter-toolbar {
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-right: 15px;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 10px;
+            color: #555;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .filter-option {
+            margin-right: 10px;
+            margin-bottom: 5px;
+            font-size: 13px;
+            color: #666;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .filter-option:hover,
+        .filter-option.active {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        .sort-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .sort-select {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #555;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        /* 分页 */
         .pagination {
             display: flex;
             justify-content: center;
             margin-top: 30px;
         }
 
-        .pagination-item {
+        .pagination a {
             margin: 0 5px;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 5px;
+            padding: 8px 12px;
             background-color: white;
-            color: #333;
-            font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        .pagination-item:hover {
+        .pagination a:hover {
             background-color: #f0f0f0;
         }
 
-        .pagination-item.active {
+        .pagination a.active {
             background-color: #0077cc;
             color: white;
         }
 
-        .pagination-item.disabled {
-            color: #ccc;
-            cursor: not-allowed;
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 280px;
+            margin-left: 30px;
         }
 
-        /* 右侧边栏样式 */
-        .sidebar-right {
-            width: 280px;
-            margin-left: 20px;
+        .sidebar-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
         }
 
         .popular-posts li {
@@ -439,11 +371,19 @@
             font-weight: 500;
             margin-bottom: 5px;
             display: block;
+            line-height: 1.4;
         }
 
         .post-meta {
             font-size: 12px;
             color: #666;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .post-meta span {
+            margin-right: 10px;
+            margin-bottom: 3px;
         }
 
         .tag-cloud {
@@ -455,6 +395,24 @@
             margin-right: 8px;
             margin-bottom: 8px;
             font-size: 13px;
+        }
+
+        .category-list li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .category-list a {
+            color: #0077cc;
+        }
+
+        .category-count {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+            color: #666;
         }
 
         /* 页脚样式 */
@@ -501,7 +459,7 @@
             text-align: center;
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 14px;
             color: #ccc;
         }
@@ -512,13 +470,27 @@
                 flex-direction: column;
             }
 
-            .sidebar-left, .sidebar-right {
+            .sidebar {
                 width: 100%;
                 margin: 0 0 20px 0;
             }
 
             .search-box {
                 display: none;
+            }
+
+            .filter-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .sort-group {
+                margin-top: 10px;
+                width: 100%;
+            }
+
+            .sort-select {
+                width: 100%;
             }
         }
 
@@ -535,9 +507,20 @@
                 margin-right: 0;
                 margin-bottom: 20px;
             }
+
+            .article-meta,
+            .article-stats {
+                flex-direction: column;
+            }
+
+            .article-meta span,
+            .article-stats span {
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- 头部导航 -->
     <header>
@@ -550,9 +533,9 @@
                     <li><a href="index.html">首页</a></li>
                     <li><a href="article.html" class="active">文章</a></li>
                     <li><a href="category.html">分类</a></li>
-                    <li><a href="#">标签</a></li>
-                    <li><a href="#">归档</a></li>
-                    <li><a href="#">关于</a></li>
+                    <li><a href="tags.html">标签</a></li>
+                    <li><a href="archive.html">归档</a></li>
+                    <li><a href="about.html">关于</a></li>
                 </ul>
             </nav>
             <div class="search-box">
@@ -564,68 +547,41 @@
 
     <!-- 主内容区 -->
     <div class="container main-content">
-        <!-- 左侧边栏 -->
-        <aside class="sidebar-left">
-            <!-- 个人资料卡片 -->
-            <div class="profile-card">
-                <img src="https://via.placeholder.com/100" alt="头像" class="profile-avatar">
-                <h2 class="profile-name">张三</h2>
-                <p class="profile-bio">资深前端开发工程师，热爱技术分享和开源项目。专注于Web前端技术栈和用户体验设计。</p>
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">128</div>
-                        <div class="stat-label">文章</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">56</div>
-                        <div class="stat-label">分类</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">1024</div>
-                        <div class="stat-label">访问</div>
-                    </div>
-                </div>
-                <div class="profile-links">
-                    <a href="#">GitHub</a>
-                    <a href="#">知乎</a>
-                    <a href="#">微博</a>
-                </div>
-            </div>
-
-            <!-- 分类导航 -->
-            <div class="category-card">
-                <h3 class="card-title">文章分类</h3>
-                <ul class="category-list">
-                    <li><a href="#">前端开发 <span class="category-count">42</span></a></li>
-                    <li><a href="#">JavaScript <span class="category-count">28</span></a></li>
-                    <li><a href="#">React <span class="category-count">16</span></a></li>
-                    <li><a href="#">Vue.js <span class="category-count">14</span></a></li>
-                    <li><a href="#">CSS技巧 <span class="category-count">12</span></a></li>
-                    <li><a href="#">性能优化 <span class="category-count">8</span></a></li>
-                    <li><a href="#">工程化 <span class="category-count">8</span></a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <!-- 中间内容区 -->
+        <!-- 内容区 -->
         <main class="content">
-            <h1 class="page-title">所有文章</h1>
+            <h1 class="page-title">文章列表</h1>
 
-            <!-- 文章筛选器 -->
-            <div class="articles-filter">
-                <div class="filter-options">
-                    <div class="filter-option active">全部</div>
-                    <div class="filter-option">最新发布</div>
-                    <div class="filter-option">热门文章</div>
-                    <div class="filter-option">精选推荐</div>
+            <!-- 筛选工具栏 -->
+            <div class="filter-toolbar">
+                <div>
+                    <div class="filter-group">
+                        <div class="filter-label">分类：</div>
+                        <div class="filter-options">
+                            <span class="filter-option active">全部</span>
+                            <span class="filter-option">前端开发</span>
+                            <span class="filter-option">JavaScript</span>
+                            <span class="filter-option">React</span>
+                            <span class="filter-option">Vue.js</span>
+                            <span class="filter-option">CSS技巧</span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-label">标签：</div>
+                        <div class="filter-options">
+                            <span class="filter-option active">全部</span>
+                            <span class="filter-option">性能优化</span>
+                            <span class="filter-option">组件设计</span>
+                            <span class="filter-option">响应式设计</span>
+                            <span class="filter-option">状态管理</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="sort-options">
-                    <span class="sort-label">排序：</span>
+                <div class="sort-group">
+                    <div class="filter-label">排序：</div>
                     <select class="sort-select">
-                        <option value="date-desc">最新发布</option>
-                        <option value="date-asc">最早发布</option>
-                        <option value="views-desc">阅读量高</option>
-                        <option value="likes-desc">点赞最多</option>
+                        <option value="newest">最新发布</option>
+                        <option value="popular">最多阅读</option>
+                        <option value="comments">最多评论</option>
                     </select>
                 </div>
             </div>
@@ -634,26 +590,29 @@
             <div class="article-list">
                 <!-- 文章1 -->
                 <article class="article-card">
-                    <h2 class="article-title"><a href="article.html">深入理解JavaScript中的闭包及其应用场景</a></h2>
+                    <h2 class="article-title"><a href="#">深入理解JavaScript中的闭包及其应用场景</a></h2>
                     <div class="article-meta">
-                        <span>发布于：2023-05-15</span>
-                        <span>分类：JavaScript</span>
-                        <span>阅读：3420</span>
+                        <span><i class="far fa-calendar"></i> 发布于：2023-05-15</span>
+                        <span><i class="far fa-folder"></i> 分类：JavaScript</span>
+                        <span><i class="far fa-eye"></i> 阅读：3420</span>
+                        <span><i class="far fa-comment"></i> 评论：18</span>
                     </div>
                     <div class="article-summary">
-                        <p>闭包是JavaScript中一个强大而复杂的特性，它允许函数访问并操作函数外部的变量。本文将深入探讨闭包的工作原理、内存管理问题以及在实际开发中的常见应用场景，帮助你更好地理解和使用这一特性。我们将通过实例代码和图解来说明闭包的形成过程，并分析其在模块化开发、数据封装和函数式编程中的重要作用...</p>
+                        <p>闭包是JavaScript中一个强大而复杂的特性，它允许函数访问并操作函数外部的变量。本文将深入探讨闭包的工作原理、内存管理问题以及在实际开发中的常见应用场景，帮助你更好地理解和使用这一特性。我们将通过实例代码和图解来说明闭包的形成过程，并分析其在模块化开发、数据封装和函数式编程中的重要作用...
+                        </p>
                     </div>
                     <div class="article-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">闭包</span>
-                        <span class="tag">函数式编程</span>
-                        <span class="tag">前端开发</span>
+                        <a href="#" class="tag">JavaScript</a>
+                        <a href="#" class="tag">闭包</a>
+                        <a href="#" class="tag">函数式编程</a>
+                        <a href="#" class="tag">前端开发</a>
                     </div>
                     <div class="article-footer">
                         <div class="article-stats">
-                            <span>👍 42</span>
+                            <span><i class="far fa-thumbs-up"></i>👍 42</span>
+                            <span><i class="far fa-bookmark"></i>💬 56</span>
                         </div>
-                        <a href="article.html" class="read-more">阅读全文 →</a>
+                        <a href="article-detail.html" class="read-more">阅读全文</a>
                     </div>
                 </article>
 
@@ -661,24 +620,28 @@
                 <article class="article-card">
                     <h2 class="article-title"><a href="#">React Hooks最佳实践与常见陷阱</a></h2>
                     <div class="article-meta">
-                        <span>发布于：2023-05-10</span>
-                        <span>分类：React</span>
-                        <span>阅读：2856</span>
+                        <span><i class="far fa-calendar"></i> 发布于：2023-05-10</span>
+                        <span><i class="far fa-folder"></i> 分类：React</span>
+                        <span><i class="far fa-eye"></i> 阅读：2856</span>
+                        <span><i class="far fa-comment"></i> 评论：14</span>
                     </div>
                     <div class="article-summary">
-                        <p>React Hooks的引入彻底改变了React组件的编写方式，使函数组件拥有了类组件的几乎所有能力。然而，Hooks的使用也带来了一些新的挑战和陷阱。本文将分享React Hooks的最佳实践，包括useState、useEffect、useCallback和useMemo的正确使用方式，以及如何避免常见的陷阱，如闭包陷阱、依赖数组错误等问题...</p>
+                        <p>自React 16.8引入Hooks以来，函数组件逐渐成为React开发的主流方式。本文总结了使用React
+                            Hooks的一些最佳实践和常见陷阱，包括useState、useEffect、useCallback和useMemo的正确使用方式，依赖数组的处理技巧，以及如何避免无限循环渲染等问题。通过本文的指导，你将能够更加高效地使用Hooks，并编写出更加清晰、可维护的React代码...
+                        </p>
                     </div>
                     <div class="article-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Hooks</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">前端开发</span>
+                        <a href="#" class="tag">React</a>
+                        <a href="#" class="tag">Hooks</a>
+                        <a href="#" class="tag">前端框架</a>
+                        <a href="#" class="tag">性能优化</a>
                     </div>
                     <div class="article-footer">
                         <div class="article-stats">
-                            <span>👍 36</span>
+                            <span><i class="far fa-thumbs-up"></i>👍 42</span>
+                            <span><i class="far fa-bookmark"></i>💬 56</span>
                         </div>
-                        <a href="#" class="read-more">阅读全文 →</a>
+                        <a href="article-detail.html" class="read-more">阅读全文</a>
                     </div>
                 </article>
 
@@ -686,132 +649,156 @@
                 <article class="article-card">
                     <h2 class="article-title"><a href="#">CSS Grid布局完全指南：从入门到精通</a></h2>
                     <div class="article-meta">
-                        <span>发布于：2023-05-05</span>
-                        <span>分类：CSS技巧</span>
-                        <span>阅读：2543</span>
+                        <span><i class="far fa-calendar"></i> 发布于：2023-05-05</span>
+                        <span><i class="far fa-folder"></i> 分类：CSS技巧</span>
+                        <span><i class="far fa-eye"></i> 阅读：2142</span>
+                        <span><i class="far fa-comment"></i> 评论：9</span>
                     </div>
                     <div class="article-summary">
-                        <p>CSS Grid布局是一种强大的二维布局系统，它彻底改变了我们设计网页布局的方式。本文将从基础概念开始，全面介绍CSS Grid的各项特性和使用技巧，包括网格容器、网格项、网格线、网格区域等核心概念，以及fr单位、minmax()函数、auto-fill/auto-fit等高级特性。通过实际案例和交互式演示，帮助你掌握这一现代布局技术...</p>
+                        <p>CSS Grid布局是一种强大的二维布局系统，为网页设计提供了前所未有的灵活性。本文将从基础概念开始，全面介绍CSS
+                            Grid的使用方法，包括网格容器和网格项的属性、网格线和网格区域的命名、响应式网格设计技巧等。通过丰富的示例和实用案例，帮助你掌握这一现代布局技术，并能够在实际项目中灵活运用，打造出更加复杂和精美的页面布局...
+                        </p>
                     </div>
                     <div class="article-tags">
-                        <span class="tag">CSS</span>
-                        <span class="tag">Grid布局</span>
-                        <span class="tag">响应式设计</span>
-                        <span class="tag">前端开发</span>
+                        <a href="#" class="tag">CSS</a>
+                        <a href="#" class="tag">Grid布局</a>
+                        <a href="#" class="tag">响应式设计</a>
+                        <a href="#" class="tag">前端开发</a>
                     </div>
                     <div class="article-footer">
                         <div class="article-stats">
-                            <span>👍 28</span>
+                            <span><i class="far fa-thumbs-up"></i>👍 42</span>
+                            <span><i class="far fa-bookmark"></i>💬 56</span>
                         </div>
-                        <a href="#" class="read-more">阅读全文 →</a>
+                        <a href="article-detail.html" class="read-more">阅读全文</a>
                     </div>
                 </article>
 
                 <!-- 文章4 -->
                 <article class="article-card">
-                    <h2 class="article-title"><a href="#">TypeScript高级类型与类型体操实战</a></h2>
+                    <h2 class="article-title"><a href="#">Vue 3 Composition API最佳实践</a></h2>
                     <div class="article-meta">
-                        <span>发布于：2023-04-28</span>
-                        <span>分类：TypeScript</span>
-                        <span>阅读：4562</span>
+                        <span><i class="far fa-calendar"></i> 发布于：2023-04-28</span>
+                        <span><i class="far fa-folder"></i> 分类：Vue.js</span>
+                        <span><i class="far fa-eye"></i> 阅读：1986</span>
+                        <span><i class="far fa-comment"></i> 评论：12</span>
                     </div>
                     <div class="article-summary">
-                        <p>TypeScript的类型系统非常强大，但也相当复杂。本文将深入探讨TypeScript的高级类型特性，包括条件类型、映射类型、索引类型、联合类型与交叉类型等，并通过一系列实际案例展示如何利用这些特性解决实际问题。我们还将介绍"类型体操"的概念，即如何利用TypeScript的类型系统实现复杂的类型转换和推导...</p>
+                        <p>Vue 3的Composition API为组件逻辑组织提供了更灵活的方式，使代码更具可复用性和可维护性。本文将深入探讨Composition
+                            API的核心概念和最佳实践，包括响应式系统的使用、生命周期钩子的替代方案、逻辑关注点的分离等。通过实际案例，展示如何将原有的Options API代码重构为Composition
+                            API，以及如何构建和组织可复用的组合式函数...</p>
                     </div>
                     <div class="article-tags">
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">类型系统</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">前端开发</span>
+                        <a href="#" class="tag">Vue.js</a>
+                        <a href="#" class="tag">Composition API</a>
+                        <a href="#" class="tag">前端框架</a>
+                        <a href="#" class="tag">组件设计</a>
                     </div>
                     <div class="article-footer">
                         <div class="article-stats">
-                            <span>👍 45</span>
+                            <span><i class="far fa-thumbs-up"></i>👍 42</span>
+                            <span><i class="far fa-bookmark"></i>💬 56</span>
                         </div>
-                        <a href="#" class="read-more">阅读全文 →</a>
+                        <a href="article-detail.html" class="read-more">阅读全文</a>
                     </div>
                 </article>
 
                 <!-- 文章5 -->
                 <article class="article-card">
-                    <h2 class="article-title"><a href="#">深入浅出Webpack5核心原理</a></h2>
+                    <h2 class="article-title"><a href="#">Web性能优化：Core Web Vitals详解</a></h2>
                     <div class="article-meta">
-                        <span>发布于：2023-04-20</span>
-                        <span>分类：工程化</span>
-                        <span>阅读：3845</span>
+                        <span><i class="far fa-calendar"></i> 发布于：2023-04-20</span>
+                        <span><i class="far fa-folder"></i> 分类：性能优化</span>
+                        <span><i class="far fa-eye"></i> 阅读：1754</span>
+                        <span><i class="far fa-comment"></i> 评论：8</span>
                     </div>
                     <div class="article-summary">
-                        <p>Webpack作为现代前端工程化的核心工具，理解其工作原理对于优化构建配置和解决常见问题至关重要。本文将深入探讨Webpack5的核心概念和工作流程，包括模块解析、依赖图构建、代码分割、Tree Shaking等机制。我们还将分析Webpack的插件系统和Loader机制，帮助你理解如何开发自定义插件和Loader来满足特定需求...</p>
+                        <p>Core Web
+                            Vitals是Google提出的一组用于评估网页用户体验的关键指标，包括加载性能、交互性和视觉稳定性。本文将详细解析这些指标的含义、测量方法和优化策略，帮助你全面提升网站的用户体验和搜索引擎排名。我们将通过实际案例，展示如何识别和解决常见的性能问题，包括优化LCP（最大内容绘制）、FID（首次输入延迟）和CLS（累积布局偏移）...
+                        </p>
                     </div>
                     <div class="article-tags">
-                        <span class="tag">Webpack</span>
-                        <span class="tag">前端工程化</span>
-                        <span class="tag">性能优化</span>
-                        <span class="tag">JavaScript</span>
+                        <a href="#" class="tag">性能优化</a>
+                        <a href="#" class="tag">Core Web Vitals</a>
+                        <a href="#" class="tag">用户体验</a>
+                        <a href="#" class="tag">前端开发</a>
                     </div>
                     <div class="article-footer">
                         <div class="article-stats">
-                            <span>👍 39</span>
+                            <span><i class="far fa-thumbs-up"></i>👍 42</span>
+                            <span><i class="far fa-bookmark"></i>💬 56</span>
                         </div>
-                        <a href="#" class="read-more">阅读全文 →</a>
+                        <a href="article-detail.html" class="read-more">阅读全文</a>
                     </div>
                 </article>
             </div>
 
             <!-- 分页 -->
             <div class="pagination">
-                <a href="#" class="pagination-item disabled">«</a>
-                <a href="#" class="pagination-item active">1</a>
-                <a href="#" class="pagination-item">2</a>
-                <a href="#" class="pagination-item">3</a>
-                <a href="#" class="pagination-item">4</a>
-                <a href="#" class="pagination-item">5</a>
-                <a href="#" class="pagination-item">»</a>
+                <a href="#">&laquo;</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&raquo;</a>
             </div>
         </main>
 
-        <!-- 右侧边栏 -->
-        <aside class="sidebar-right">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
             <!-- 热门文章 -->
-            <div class="category-card">
-                <h3 class="card-title">热门文章</h3>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门文章</h3>
                 <ul class="popular-posts">
                     <li>
-                        <a href="#" class="post-title">TypeScript高级类型与类型体操实战</a>
+                        <a href="article-detail.html" class="post-title">TypeScript高级类型与类型体操实战</a>
                         <div class="post-meta">
                             <span>阅读：4562</span>
+                            <span>评论：32</span>
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="post-title">深入浅出Webpack5核心原理</a>
+                        <a href="article-detail.html" class="post-title">深入浅出Webpack5核心原理</a>
                         <div class="post-meta">
                             <span>阅读：3845</span>
+                            <span>评论：26</span>
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="post-title">CSS变量和计算属性实现主题切换</a>
+                        <a href="article-detail.html" class="post-title">CSS变量和计算属性实现主题切换</a>
                         <div class="post-meta">
                             <span>阅读：3214</span>
+                            <span>评论：18</span>
                         </div>
                     </li>
                     <li>
-                        <a href="#" class="post-title">React性能优化最佳实践</a>
+                        <a href="article-detail.html" class="post-title">React性能优化最佳实践</a>
                         <div class="post-meta">
                             <span>阅读：2987</span>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="post-title">前端工程化实践与思考</a>
-                        <div class="post-meta">
-                            <span>阅读：2756</span>
+                            <span>评论：24</span>
                         </div>
                     </li>
                 </ul>
             </div>
 
+            <!-- 文章分类 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">文章分类</h3>
+                <ul class="category-list">
+                    <li><a href="#">前端开发</a> <span class="category-count">42</span></li>
+                    <li><a href="#">JavaScript</a> <span class="category-count">28</span></li>
+                    <li><a href="#">React</a> <span class="category-count">16</span></li>
+                    <li><a href="#">Vue.js</a> <span class="category-count">14</span></li>
+                    <li><a href="#">CSS技巧</a> <span class="category-count">12</span></li>
+                    <li><a href="#">性能优化</a> <span class="category-count">8</span></li>
+                    <li><a href="#">工程化</a> <span class="category-count">8</span></li>
+                </ul>
+            </div>
+
             <!-- 标签云 -->
-            <div class="category-card">
-                <h3 class="card-title">标签云</h3>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">标签云</h3>
                 <div class="tag-cloud">
                     <a href="#">JavaScript</a>
                     <a href="#">TypeScript</a>
@@ -828,12 +815,31 @@
                     <a href="#">微前端</a>
                     <a href="#">状态管理</a>
                     <a href="#">组件设计</a>
-                    <a href="#">响应式设计</a>
-                    <a href="#">浏览器原理</a>
-                    <a href="#">HTTP协议</a>
-                    <a href="#">Web安全</a>
-                    <a href="#">前端测试</a>
                 </div>
+            </div>
+            <!-- 最新评论 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">最新评论</h3>
+                <ul class="popular-posts">
+                    <li>
+                        <a href="#" class="post-title">李四：这篇文章讲解得非常清晰，对我理解闭包很有帮助！</a>
+                        <div class="post-meta">
+                            <span>文章：深入理解JavaScript中的闭包及其应用场景</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="post-title">王五：useCallback的使用场景分析得很到位，解决了我的困惑。</a>
+                        <div class="post-meta">
+                            <span>文章：React Hooks最佳实践与常见陷阱</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="post-title">赵六：grid-template-areas的例子很实用，已经应用到我的项目中了。</a>
+                        <div class="post-meta">
+                            <span>文章：CSS Grid布局完全指南：从入门到精通</span>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </aside>
     </div>
@@ -855,11 +861,11 @@
                 <div class="footer-section">
                     <h3 class="footer-title">博客分类</h3>
                     <ul class="footer-links">
-                        <li><a href="#frontend">前端开发</a></li>
-                        <li><a href="#javascript">JavaScript</a></li>
-                        <li><a href="#react">框架与库</a></li>
-                        <li><a href="#performance">性能优化</a></li>
-                        <li><a href="#engineering">工程化实践</a></li>
+                        <li><a href="#">前端开发</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">框架与库</a></li>
+                        <li><a href="#">性能优化</a></li>
+                        <li><a href="#">工程化实践</a></li>
                     </ul>
                 </div>
 
@@ -876,10 +882,11 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2023 技术博客 | 设计与开发：张三 | <a href="#" style="color: #ccc;">隐私政策</a> | <a href="#" style="color: #ccc;">使用条款</a></p>
+                <p>&copy; 2023 技术博客 | 设计与开发：张三 | <a href="#" style="color: #ccc;">隐私政策</a> | <a href="#"
+                        style="color: #ccc;">使用条款</a></p>
             </div>
         </div>
     </footer>
-
 </body>
+
 </html>

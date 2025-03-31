@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章归档 - 我的技术博客</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0077cc;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #005fa3;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #2e3846;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            color: white;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #66b1ff;
+        }
+
+        .nav-menu a.active {
+            color: #66b1ff;
+            border-bottom: 2px solid #66b1ff;
+            padding-bottom: 5px;
+        }
+
+        .search-box {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .search-box input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-box button {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        /* 主内容区样式 */
+        .main-content {
+            display: flex;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* 内容区样式 */
+        .content {
+            flex: 1;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        /* 归档样式 */
+        .archive-container {
+            background-color: white;
+            border-radius: 5px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .year-section {
+            margin-bottom: 40px;
+        }
+
+        .year-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .year-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            color: #333;
+        }
+
+        .month-section {
+            margin-bottom: 25px;
+        }
+
+        .month-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #444;
+            display: flex;
+            align-items: center;
+        }
+
+        .month-title:before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #0077cc;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .article-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .article-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .article-date {
+            min-width: 80px;
+            font-size: 14px;
+            color: #666;
+            margin-right: 15px;
+        }
+
+        .article-info {
+            flex: 1;
+        }
+
+        .article-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .article-meta span {
+            margin-right: 15px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            padding: 2px 6px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: #666;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .tag:hover {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        /* 归档统计 */
+        .archive-stats {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .stat-item {
+            margin: 10px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0077cc;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 时间线样式 */
+        .timeline-container {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e0e0e0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -4px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #0077cc;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 280px;
+            margin-left: 30px;
+        }
+
+        .sidebar-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .year-list {
+            margin-bottom: 20px;
+        }
+
+        .year-list li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .year-count {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .tag-cloud a {
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #2e3846;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        .footer-section:last-child {
+            margin-right: 0;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin: 30px 0 0 0;
+            }
+
+            .search-box {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .archive-stats {
+                flex-direction: column;
+            }
+
+            .stat-item {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">技术博客</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="article.html">文章</a></li>
+                    <li><a href="category.html">分类</a></li>
+                    <li><a href="tags.html">标签</a></li>
+                    <li><a href="archive.html" class="active">归档</a></li>
+                    <li><a href="about.html">关于</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索文章...">
+                <button type="submit">搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="container main-content">
+        <!-- 内容区 -->
+        <main class="content">
+            <h1 class="page-title">文章归档</h1>
+
+            <!-- 归档统计 -->
+            <div class="archive-stats">
+                <div class="stat-item">
+                    <div class="stat-value">128</div>
+                    <div class="stat-label">文章总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">年度归档</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">月度归档</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">42</div>
+                    <div class="stat-label">分类总数</div>
+                </div>
+            </div>
+
+            <!-- 归档内容 -->
+            <div class="archive-container">
+                <!-- 2023年 -->
+                <div class="year-section">
+                    <h2 class="year-title">2023年 (56篇文章)</h2>
+
+                    <!-- 5月 -->
+                    <div class="month-section">
+                        <h3 class="month-title">5月 (12篇文章)</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+
+                            <!-- 文章项 -->
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-05-15</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">深入理解JavaScript中的闭包及其应用场景</a>
+                                    <div class="article-meta">
+                                        <span>分类：JavaScript</span>
+                                        <span>阅读：3420</span>
+                                        <span>评论：18</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">JavaScript</a>
+                                        <a href="#" class="tag">闭包</a>
+                                        <a href="#" class="tag">函数式编程</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-05-12</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">使用TypeScript构建类型安全的React应用</a>
+                                    <div class="article-meta">
+                                        <span>分类：TypeScript</span>
+                                        <span>阅读：2156</span>
+                                        <span>评论：11</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">TypeScript</a>
+                                        <a href="#" class="tag">React</a>
+                                        <a href="#" class="tag">类型系统</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-05-10</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">React Hooks最佳实践与常见陷阱</a>
+                                    <div class="article-meta">
+                                        <span>分类：React</span>
+                                        <span>阅读：2856</span>
+                                        <span>评论：14</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">React</a>
+                                        <a href="#" class="tag">Hooks</a>
+                                        <a href="#" class="tag">前端框架</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-05-05</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">CSS Grid布局完全指南：从入门到精通</a>
+                                    <div class="article-meta">
+                                        <span>分类：CSS技巧</span>
+                                        <span>阅读：2142</span>
+                                        <span>评论：9</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">CSS</a>
+                                        <a href="#" class="tag">Grid布局</a>
+                                        <a href="#" class="tag">响应式设计</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-05-02</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">前端微服务架构实践与思考</a>
+                                    <div class="article-meta">
+                                        <span>分类：前端架构</span>
+                                        <span>阅读：1876</span>
+                                        <span>评论：7</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">微前端</a>
+                                        <a href="#" class="tag">架构设计</a>
+                                        <a href="#" class="tag">模块联邦</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4月 -->
+                    <div class="month-section">
+                        <h3 class="month-title">4月 (10篇文章)</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-04-28</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">Vue 3 Composition API最佳实践</a>
+                                    <div class="article-meta">
+                                        <span>分类：Vue.js</span>
+                                        <span>阅读：1986</span>
+                                        <span>评论：12</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">Vue.js</a>
+                                        <a href="#" class="tag">Composition API</a>
+                                        <a href="#" class="tag">前端框架</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-04-25</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">现代前端工程化实践：从Webpack到Vite</a>
+                                    <div class="article-meta">
+                                        <span>分类：工程化</span>
+                                        <span>阅读：1845</span>
+                                        <span>评论：10</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">Webpack</a>
+                                        <a href="#" class="tag">Vite</a>
+                                        <a href="#" class="tag">前端工程化</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-04-20</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">Web性能优化：Core Web Vitals详解</a>
+                                    <div class="article-meta">
+                                        <span>分类：性能优化</span>
+                                        <span>阅读：1754</span>
+                                        <span>评论：8</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">性能优化</a>
+                                        <a href="#" class="tag">Core Web Vitals</a>
+                                        <a href="#" class="tag">用户体验</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3月 -->
+                    <div class="month-section">
+                        <h3 class="month-title">3月 (8篇文章)</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-03-28</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">TypeScript高级类型与类型体操实战</a>
+                                    <div class="article-meta">
+                                        <span>分类：TypeScript</span>
+                                        <span>阅读：4562</span>
+                                        <span>评论：32</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">TypeScript</a>
+                                        <a href="#" class="tag">类型系统</a>
+                                        <a href="#" class="tag">类型编程</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2023-03-20</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">深入浅出Webpack5核心原理</a>
+                                    <div class="article-meta">
+                                        <span>分类：工程化</span>
+                                        <span>阅读：3845</span>
+                                        <span>评论：26</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">Webpack</a>
+                                        <a href="#" class="tag">前端工程化</a>
+                                        <a href="#" class="tag">模块打包</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2022年 -->
+                <div class="year-section">
+                    <h2 class="year-title">2022年 (42篇文章)</h2>
+
+                    <!-- 12月 -->
+                    <div class="month-section">
+                        <h3 class="month-title">12月 (6篇文章)</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2022-12-25</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">2022年前端技术盘点与2023年发展趋势预测</a>
+                                    <div class="article-meta">
+                                        <span>分类：前端综合</span>
+                                        <span>阅读：5642</span>
+                                        <span>评论：38</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">年度总结</a>
+                                        <a href="#" class="tag">技术趋势</a>
+                                        <a href="#" class="tag">前端发展</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2022-12-18</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">CSS变量和计算属性实现主题切换</a>
+                                    <div class="article-meta">
+                                        <span>分类：CSS技巧</span>
+                                        <span>阅读：3214</span>
+                                        <span>评论：18</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">CSS</a>
+                                        <a href="#" class="tag">CSS变量</a>
+                                        <a href="#" class="tag">主题切换</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11月 -->
+                    <div class="month-section">
+                        <h3 class="month-title">11月 (5篇文章)</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2022-11-28</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">React性能优化最佳实践</a>
+                                    <div class="article-meta">
+                                        <span>分类：React</span>
+                                        <span>阅读：2987</span>
+                                        <span>评论：24</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">React</a>
+                                        <a href="#" class="tag">性能优化</a>
+                                        <a href="#" class="tag">渲染优化</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2021年 -->
+                <div class="year-section">
+                    <h2 class="year-title">2021年 (30篇文章)</h2>
+
+                    <!-- 12月 -->
+                    <div class="month-section">
+                        <h3 class="month-title">12月 (4篇文章)</h3>
+                        <div class="timeline-container">
+                            <div class="timeline-line"></div>
+
+                            <div class="article-item">
+                                <div class="timeline-dot"></div>
+                                <div class="article-date">2021-12-30</div>
+                                <div class="article-info">
+                                    <a href="#" class="article-title">2021年前端技术回顾与展望</a>
+                                    <div class="article-meta">
+                                        <span>分类：前端综合</span>
+                                        <span>阅读：4876</span>
+                                        <span>评论：35</span>
+                                    </div>
+                                    <div class="article-tags">
+                                        <a href="#" class="tag">年度总结</a>
+                                        <a href="#" class="tag">技术趋势</a>
+                                        <a href="#" class="tag">前端发展</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <!-- 年度归档 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">年度归档</h3>
+                <ul class="year-list">
+                    <li><a href="#2023">2023年</a> <span class="year-count">56</span></li>
+                    <li><a href="#2022">2022年</a> <span class="year-count">42</span></li>
+                    <li><a href="#2021">2021年</a> <span class="year-count">30</span></li>
+                </ul>
+            </div>
+
+            <!-- 热门标签 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门标签</h3>
+                <div class="tag-cloud">
+                    <a href="#">JavaScript</a>
+                    <a href="#">TypeScript</a>
+                    <a href="#">React</a>
+                    <a href="#">Vue.js</a>
+                    <a href="#">CSS</a>
+                    <a href="#">性能优化</a>
+                    <a href="#">前端工程化</a>
+                    <a href="#">Webpack</a>
+                    <a href="#">Vite</a>
+                    <a href="#">微前端</a>
+                    <a href="#">组件设计</a>
+                    <a href="#">状态管理</a>
+                    <a href="#">响应式设计</a>
+                    <a href="#">前端架构</a>
+                    <a href="#">Node.js</a>
+                </div>
+            </div>
+
+            <!-- 热门文章 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门文章</h3>
+                <ul class="popular-posts">
+                    <li>
+                        <a href="#" class="post-title">TypeScript高级类型与类型体操实战</a>
+                        <div class="post-meta">
+                            <span>阅读：4562</span>
+                            <span>评论：32</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#" class="post-title">深入浅出Webpack5核心原理</a>
+                        <div class="post-meta">
+                            <span>阅读：3845</span>
+                            <span>评论：26</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">关于博客</h3>
+                    <p style="color: #ccc; margin-bottom: 15px;">这是一个专注于前端技术分享的个人博客，记录学习心得与技术实践，希望能帮助到更多的开发者。</p>
+                    <div class="profile-links" style="justify-content: flex-start;">
+                        <a href="#">GitHub</a>
+                        <a href="#">知乎</a>
+                        <a href="#">微博</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">博客分类</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">前端开发</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">框架与库</a></li>
+                        <li><a href="#">性能优化</a></li>
+                        <li><a href="#">工程化实践</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">友情链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">MDN Web 文档</a></li>
+                        <li><a href="#">CSS-Tricks</a></li>
+                        <li><a href="#">JavaScript.info</a></li>
+                        <li><a href="#">React 官方文档</a></li>
+                        <li><a href="#">Vue.js 官方文档</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 技术博客 | 设计与开发：张三 | <a href="#" style="color: #ccc;">隐私政策</a> | <a href="#"
+                        style="color: #ccc;">使用条款</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

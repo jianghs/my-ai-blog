@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签云 - 我的技术博客</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0077cc;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #005fa3;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #2e3846;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            color: white;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #66b1ff;
+        }
+
+        .nav-menu a.active {
+            color: #66b1ff;
+            border-bottom: 2px solid #66b1ff;
+            padding-bottom: 5px;
+        }
+
+        .search-box {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .search-box input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-box button {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        /* 主内容区样式 */
+        .main-content {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* 标签导航样式 */
+        .tags-nav {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .tag-item {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            color: #555;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .tag-item:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tag-item.active {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        /* 标签大小变化 */
+        .tag-xs { font-size: 12px; }
+        .tag-sm { font-size: 14px; }
+        .tag-md { font-size: 16px; }
+        .tag-lg { font-size: 18px; }
+        .tag-xl { font-size: 20px; }
+
+        /* 文章列表样式 */
+        .article-list {
+            margin-bottom: 30px;
+        }
+
+        .article-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .article-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .article-title a {
+            color: #333;
+        }
+
+        .article-title a:hover {
+            color: #0077cc;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .article-meta span {
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
+
+        .article-summary {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            padding: 3px 8px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #666;
+            transition: background-color 0.3s;
+        }
+
+        .tag:hover {
+            background-color: #e0e0e0;
+        }
+
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .article-stats {
+            display: flex;
+        }
+
+        .article-stats span {
+            margin-right: 15px;
+            color: #666;
+        }
+
+        .read-more {
+            color: #0077cc;
+            font-weight: 500;
+        }
+
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 8px 12px;
+            background-color: white;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .pagination a.active {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #2e3846;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        .footer-section:last-child {
+            margin-right: 0;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .search-box {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">技术博客</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="article.html">文章</a></li>
+                    <li><a href="category.html">分类</a></li>
+                    <li><a href="tags.html" class="active">标签</a></li>
+                    <li><a href="archive.html">归档</a></li>
+                    <li><a href="about.html">关于</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索文章...">
+                <button type="submit">搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="container main-content">
+        <h1 class="page-title">标签云</h1>
+
+        <!-- 标签导航 -->
+        <section class="tags-nav">
+            <div class="tags-container">
+                <a href="#" class="tag-item tag-lg active">全部</a>
+                <a href="#" class="tag-item tag-xl">JavaScript</a>
+                <a href="#" class="tag-item tag-lg">TypeScript</a>
+                <a href="#" class="tag-item tag-xl">React</a>
+                <a href="#" class="tag-item tag-lg">Vue.js</a>
+                <a href="#" class="tag-item tag-md">Angular</a>
+                <a href="#" class="tag-item tag-md">Node.js</a>
+                <a href="#" class="tag-item tag-md">Webpack</a>
+                <a href="#" class="tag-item tag-sm">Vite</a>
+                <a href="#" class="tag-item tag-lg">CSS</a>
+                <a href="#" class="tag-item tag-md">HTML5</a>
+                <a href="#" class="tag-item tag-md">性能优化</a>
+                <a href="#" class="tag-item tag-lg">前端工程化</a>
+                <a href="#" class="tag-item tag-sm">微前端</a>
+                <a href="#" class="tag-item tag-sm">状态管理</a>
+                <a href="#" class="tag-item tag-md">组件设计</a>
+                <a href="#" class="tag-item tag-md">响应式设计</a>
+                <a href="#" class="tag-item tag-xs">浏览器原理</a>
+                <a href="#" class="tag-item tag-xs">HTTP协议</a>
+                <a href="#" class="tag-item tag-sm">Web安全</a>
+                <a href="#" class="tag-item tag-xs">前端测试</a>
+                <a href="#" class="tag-item tag-xs">WebAssembly</a>
+                <a href="#" class="tag-item tag-sm">GraphQL</a>
+                <a href="#" class="tag-item tag-xs">PWA</a>
+                <a href="#" class="tag-item tag-xs">WebRTC</a>
+            </div>
+        </section>
+
+        <!-- 文章列表 -->
+        <div class="article-list">
+            <h2 style="margin-bottom: 20px;">标签：全部</h2>
+
+            <!-- 文章1 -->
+            <article class="article-card">
+                <h2 class="article-title"><a href="#">深入理解JavaScript中的闭包及其应用场景</a></h2>
+                <div class="article-meta">
+                    <span>发布于：2023-05-15</span>
+                    <span>分类：JavaScript</span>
+                    <span>阅读：3420</span>
+                </div>
+                <div class="article-summary">
+                    <p>闭包是JavaScript中一个强大而复杂的特性，它允许函数访问并操作函数外部的变量。本文将深入探讨闭包的工作原理、内存管理问题以及在实际开发中的常见应用场景，帮助你更好地理解和使用这一特性。我们将通过实例代码和图解来说明闭包的形成过程，并分析其在模块化开发、数据封装和函数式编程中的重要作用...</p>
+                </div>
+                <div class="article-tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">闭包</span>
+                    <span class="tag">函数式编程</span>
+                    <span class="tag">前端开发</span>
+                </div>
+                <div class="article-footer">
+                    <div class="article-stats">
+                        <span>👍 42</span>
+                        <span>💬 18</span>
+                    </div>
+                    <a href="#" class="read-more">阅读全文 →</a>
+                </div>
+            </article>
+
+            <!-- 文章2 -->
+            <article class="article-card">
+                <h2 class="article-title"><a href="#">React Hooks最佳实践与常见陷阱</a></h2>
+                <div class="article-meta">
+                    <span>发布于：2023-05-10</span>
+                    <span>分类：React</span>
+                    <span>阅读：2856</span>
+                </div>
+                <div class="article-summary">
+                    <p>React Hooks的引入彻底改变了React组件的编写方式，使函数组件拥有了类组件的几乎所有能力。然而，Hooks的使用也带来了一些新的挑战和陷阱。本文将分享React Hooks的最佳实践，包括useState、useEffect、useCallback和useMemo的正确使用方式，以及如何避免常见的陷阱，如闭包陷阱、依赖数组错误等问题...</p>
+                </div>
+                <div class="article-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">Hooks</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">前端开发</span>
+                </div>
+                <div class="article-footer">
+                    <div class="article-stats">
+                        <span>👍 36</span>
+                        <span>💬 14</span>
+                    </div>
+                    <a href="#" class="read-more">阅读全文 →</a>
+                </div>
+            </article>
+
+            <!-- 文章3 -->
+            <article class="article-card">
+                <h2 class="article-title"><a href="#">CSS Grid布局完全指南：从入门到精通</a></h2>
+                <div class="article-meta">
+                    <span>发布于：2023-05-05</span>
+                    <span>分类：CSS技巧</span>
+                    <span>阅读：2543</span>
+                </div>
+                <div class="article-summary">
+                    <p>CSS Grid布局是一种强大的二维布局系统，它彻底改变了我们设计网页布局的方式。本文将从基础概念开始，全面介绍CSS Grid的各项特性和使用技巧，包括网格容器、网格项、网格线、网格区域等核心概念，以及fr单位、minmax()函数、auto-fill/auto-fit等高级特性。通过实际案例和交互式演示，帮助你掌握这一现代布局技术...</p>
+                </div>
+                <div class="article-tags">
+                    <span class="tag">CSS</span>
+                    <span class="tag">Grid布局</span>
+                    <span class="tag">响应式设计</span>
+                    <span class="tag">前端开发</span>
+                </div>
+                <div class="article-footer">
+                    <div class="article-stats">
+                        <span>👍 28</span>
+                        <span>💬 9</span>
+                    </div>
+                    <a href="#" class="read-more">阅读全文 →</a>
+                </div>
+            </article>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination">
+            <a href="#" class="disabled">&laquo;</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">关于博客</h3>
+                    <p style="color: #ccc; margin-bottom: 15px;">这是一个专注于前端技术分享的个人博客，记录学习心得与技术实践，希望能帮助到更多的开发者。</p>
+                    <div class="profile-links" style="justify-content: flex-start;">
+                        <a href="#">GitHub</a>
+                        <a href="#">知乎</a>
+                        <a href="#">微博</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">博客分类</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">前端开发</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">框架与库</a></li>
+                        <li><a href="#">性能优化</a></li>
+                        <li><a href="#">工程化实践</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">友情链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">MDN Web 文档</a></li>
+                        <li><a href="#">CSS-Tricks</a></li>
+                        <li><a href="#">JavaScript.info</a></li>
+                        <li><a href="#">React 官方文档</a></li>
+                        <li><a href="#">Vue.js 官方文档</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 技术博客 | 设计与开发：张三 | <a href="#" style="color: #ccc;">隐私政策</a> | <a href="#" style="color: #ccc;">使用条款</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 标签点击功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagItems = document.querySelectorAll('.tag-item');
+            const articleListTitle = document.querySelector('.article-list h2');
+
+            tagItems.forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // 移除所有标签的active类
+                    tagItems.forEach(t => t.classList.remove('active'));
+
+                    // 为当前点击的标签添加active类
+                    this.classList.add('active');
+
+                    // 更新文章列表标题
+                    const tagName = this.textContent;
+                    articleListTitle.textContent = `标签：${tagName}`;
+
+                    // 这里可以添加AJAX请求来获取相关标签的文章
+                    // 或者使用前端过滤显示相关文章
+                });
+            });
+        });
+    </script>
+</body>
+</html>

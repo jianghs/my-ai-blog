@@ -113,173 +113,42 @@
         /* 主内容区样式 */
         .main-content {
             display: flex;
-            margin-top: 20px;
+            margin-top: 30px;
             margin-bottom: 40px;
         }
 
-        /* 左侧边栏样式 */
-        .sidebar-left {
-            width: 250px;
-            margin-right: 20px;
-        }
-
-        .profile-card {
-            background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: block;
-            object-fit: cover;
-            background-color: #e0e0e0;
-        }
-
-        .profile-name {
-            font-size: 18px;
+        /* 页面标题 */
+        .page-title {
+            font-size: 28px;
             font-weight: bold;
-            text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 25px;
+            color: #333;
         }
 
-        .profile-bio {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .profile-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 15px;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .profile-links {
-            display: flex;
-            justify-content: center;
-        }
-
-        .profile-links a {
-            margin: 0 10px;
-            font-size: 14px;
-        }
-
-        .category-card {
-            background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .card-title {
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .category-list li {
-            margin-bottom: 10px;
-        }
-
-        .category-list a {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .category-count {
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            padding: 2px 8px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* 中间内容区样式 */
+        /* 分类内容区样式 */
         .content {
             flex: 1;
         }
 
-        /* 分页导航样式 */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-            gap: 10px;
+        /* 分类列表样式 */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .pagination-button {
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: white;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .pagination-button:hover {
-            background-color: #f0f0f0;
-        }
-
-        .pagination-button.active {
-            background-color: #0077cc;
-            color: white;
-            border-color: #0077cc;
-        }
-
-        .pagination-button:disabled {
-            background-color: #f5f5f5;
-            color: #999;
-            cursor: not-allowed;
-        }
-
-        .pagination-info {
-            color: #666;
-            font-size: 14px;
-        }
-
-        /* 分类页面特有样式 */
-        .page-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .category-section {
+        .category-item {
             background-color: white;
             border-radius: 5px;
             padding: 20px;
-            margin-bottom: 30px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .category-header {
@@ -292,95 +161,106 @@
         }
 
         .category-name {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            color: #0077cc;
+            color: #333;
+        }
+
+        .category-count {
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 14px;
+            color: #666;
         }
 
         .category-description {
+            color: #666;
             font-size: 14px;
-            color: #666;
             margin-bottom: 15px;
+            line-height: 1.5;
         }
 
-        .article-list {
-            margin-bottom: 20px;
+        .recent-posts {
+            margin-top: 15px;
         }
 
-        .article-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .article-item:last-child {
-            border-bottom: none;
-        }
-
-        .article-info {
-            flex: 1;
-        }
-
-        .article-title {
-            font-size: 16px;
+        .recent-posts-title {
+            font-size: 15px;
             font-weight: 500;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            color: #555;
         }
 
-        .article-meta {
-            display: flex;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .article-meta span {
-            margin-right: 15px;
-        }
-
-        .article-stats {
+        .recent-post-item {
+            margin-bottom: 8px;
+            font-size: 14px;
             display: flex;
             align-items: center;
         }
 
-        .article-stats span {
-            margin-left: 15px;
-            font-size: 12px;
-            color: #666;
+        .recent-post-item:before {
+            content: "•";
+            margin-right: 8px;
+            color: #0077cc;
         }
 
         .view-all {
             display: inline-block;
             margin-top: 10px;
             font-size: 14px;
-            color: #0077cc;
+            font-weight: 500;
         }
 
-        /* 右侧边栏样式 */
-        .sidebar-right {
+        /* 侧边栏样式 */
+        .sidebar {
             width: 280px;
-            margin-left: 20px;
+            margin-left: 30px;
         }
 
-        .popular-posts li {
+        .sidebar-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
             margin-bottom: 15px;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 1px solid #eee;
         }
 
-        .popular-posts li:last-child {
+        .popular-categories li {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popular-categories li:last-child {
             margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
         }
 
-        .post-title {
-            font-weight: 500;
-            margin-bottom: 5px;
-            display: block;
+        .popular-category-name {
+            display: flex;
+            align-items: center;
         }
 
-        .post-meta {
+        .category-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+
+        .popular-category-count {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 2px 8px;
             font-size: 12px;
             color: #666;
         }
@@ -445,21 +325,23 @@
             color: #ccc;
         }
 
-
-
         /* 响应式设计 */
         @media (max-width: 992px) {
             .main-content {
                 flex-direction: column;
             }
 
-            .sidebar-left, .sidebar-right {
+            .sidebar {
                 width: 100%;
                 margin: 0 0 20px 0;
             }
 
             .search-box {
                 display: none;
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
 
@@ -476,6 +358,10 @@
                 margin-right: 0;
                 margin-bottom: 20px;
             }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -491,9 +377,9 @@
                     <li><a href="index.html">首页</a></li>
                     <li><a href="article.html">文章</a></li>
                     <li><a href="category.html" class="active">分类</a></li>
-                    <li><a href="#">标签</a></li>
-                    <li><a href="#">归档</a></li>
-                    <li><a href="#">关于</a></li>
+                    <li><a href="tags.html">标签</a></li>
+                    <li><a href="archive.html">归档</a></li>
+                    <li><a href="about.html">关于</a></li>
                 </ul>
             </nav>
             <div class="search-box">
@@ -505,287 +391,300 @@
 
     <!-- 主内容区 -->
     <div class="container main-content">
-        <!-- 左侧边栏 -->
-        <aside class="sidebar-left">
-            <!-- 个人资料卡片 -->
-            <div class="profile-card">
-                <img src="https://via.placeholder.com/100" alt="头像" class="profile-avatar">
-                <h2 class="profile-name">张三</h2>
-                <p class="profile-bio">资深前端开发工程师，热爱技术分享和开源项目。专注于Web前端技术栈和用户体验设计。</p>
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <div class="stat-value">128</div>
-                        <div class="stat-label">文章</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">56</div>
-                        <div class="stat-label">分类</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">1024</div>
-                        <div class="stat-label">访问</div>
-                    </div>
-                </div>
-                <div class="profile-links">
-                    <a href="#">GitHub</a>
-                    <a href="#">知乎</a>
-                    <a href="#">微博</a>
-                </div>
-            </div>
-
-            <!-- 分类导航 -->
-            <div class="category-card">
-                <h3 class="card-title">文章分类</h3>
-                <ul class="category-list">
-                    <li><a href="#frontend">前端开发 <span class="category-count">42</span></a></li>
-                    <li><a href="#javascript">JavaScript <span class="category-count">28</span></a></li>
-                    <li><a href="#react">React <span class="category-count">16</span></a></li>
-                    <li><a href="#vuejs">Vue.js <span class="category-count">14</span></a></li>
-                    <li><a href="#css">CSS技巧 <span class="category-count">12</span></a></li>
-                    <li><a href="#performance">性能优化 <span class="category-count">8</span></a></li>
-                    <li><a href="#engineering">工程化 <span class="category-count">8</span></a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <!-- 中间内容区 -->
+        <!-- 内容区 -->
         <main class="content">
             <h1 class="page-title">文章分类</h1>
 
-            <!-- 前端开发分类 -->
-            <section id="frontend" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-name">前端开发</h2>
-                    <span class="category-count">42篇文章</span>
-                </div>
-                <p class="category-description">前端开发相关的文章，包括HTML、CSS、JavaScript以及各种前端框架和工具的使用技巧和最佳实践。</p>
-
-                <div class="article-list">
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">现代前端开发工作流程与工具链</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-06-10</span>
-                                <span>阅读：2156</span>
-                            </div>
+            <!-- 分类网格 -->
+            <div class="category-grid">
+                <!-- 分类1 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">前端开发</h2>
+                        <span class="category-count">42篇文章</span>
+                    </div>
+                    <p class="category-description">前端开发相关的技术文章，包括HTML、CSS、JavaScript等基础知识，以及现代前端开发的各种技术和最佳实践。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">现代前端工程化实践与思考</a>
                         </div>
-                        <div class="article-stats">
-                            <span>👍 32</span>
+                        <div class="recent-post-item">
+                            <a href="#">前端性能优化的20个实用技巧</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">Web Components入门与实践</a>
                         </div>
                     </div>
-
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">前端架构设计：从零到一搭建大型应用</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-05-28</span>
-                                <span>阅读：1876</span>
-                            </div>
-                        </div>
-                        <div class="article-stats">
-                            <span>👍 26</span>
-                        </div>
-                    </div>
-
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">前端安全最佳实践：XSS与CSRF防御指南</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-05-15</span>
-                                <span>阅读：1654</span>
-                            </div>
-                        </div>
-                        <div class="article-stats">
-                            <span>👍 24</span>
-                        </div>
-                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
                 </div>
 
-                <a href="#" class="view-all">查看全部 42 篇文章 →</a>
-            </section>
-
-            <!-- JavaScript分类 -->
-            <section id="javascript" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-name">JavaScript</h2>
-                    <span class="category-count">28篇文章</span>
-                </div>
-                <p class="category-description">JavaScript相关的文章，包括语言特性、ES6+新特性、异步编程、函数式编程等内容。</p>
-
-                <div class="article-list">
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">深入理解JavaScript中的闭包及其应用场景</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-05-15</span>
-                                <span>阅读：3420</span>
-                            </div>
+                <!-- 分类2 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">JavaScript</h2>
+                        <span class="category-count">28篇文章</span>
+                    </div>
+                    <p class="category-description">JavaScript语言相关的深度技术文章，包括语言特性、设计模式、异步编程、函数式编程等高级主题。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">深入理解JavaScript中的闭包及其应用场景</a>
                         </div>
-                        <div class="article-stats">
-                            <span>👍 42</span>
+                        <div class="recent-post-item">
+                            <a href="#">JavaScript异步编程全解析</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">ES2022新特性详解与实践</a>
                         </div>
                     </div>
-
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">JavaScript异步编程全解析</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-04-20</span>
-                                <span>阅读：2845</span>
-                            </div>
-                        </div>
-                        <div class="article-stats">
-                            <span>👍 38</span>
-                        </div>
-                    </div>
-
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">ES6+新特性实战指南</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-03-15</span>
-                                <span>阅读：3156</span>
-                            </div>
-                        </div>
-                        <div class="article-stats">
-                            <span>👍 36</span>
-                        </div>
-                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
                 </div>
 
-                <a href="#" class="view-all">查看全部 28 篇文章 →</a>
-            </section>
-
-            <!-- React分类 -->
-            <section id="react" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-name">React</h2>
-                    <span class="category-count">16篇文章</span>
-                </div>
-                <p class="category-description">React相关的文章，包括组件设计、状态管理、Hooks使用、性能优化等内容。</p>
-
-                <div class="article-list">
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">React Hooks最佳实践与常见陷阱</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-05-10</span>
-                                <span>阅读：2856</span>
-                            </div>
+                <!-- 分类3 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">React</h2>
+                        <span class="category-count">16篇文章</span>
+                    </div>
+                    <p class="category-description">React框架相关的技术文章，包括组件设计、状态管理、性能优化、Hooks使用技巧等实用内容。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">React Hooks最佳实践与常见陷阱</a>
                         </div>
-                        <div class="article-stats">
-                            <span>👍 36</span>
+                        <div class="recent-post-item">
+                            <a href="#">React性能优化完全指南</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">React 18新特性解析</a>
                         </div>
                     </div>
-
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">React性能优化最佳实践</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-04-05</span>
-                                <span>阅读：2987</span>
-                            </div>
-                        </div>
-                        <div class="article-stats">
-                            <span>👍 34</span>
-                        </div>
-                    </div>
-
-                    <div class="article-item">
-                        <div class="article-info">
-                            <h3 class="article-title"><a href="#">React组件设计模式与最佳实践</a></h3>
-                            <div class="article-meta">
-                                <span>发布于：2023-03-20</span>
-                                <span>阅读：2654</span>
-                            </div>
-                        </div>
-                        <div class="article-stats">
-                            <span>👍 30</span>
-                        </div>
-                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
                 </div>
 
-                <a href="#" class="view-all">查看全部 16 篇文章 →</a>
-            </section>
+                <!-- 分类4 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">Vue.js</h2>
+                        <span class="category-count">14篇文章</span>
+                    </div>
+                    <p class="category-description">Vue.js框架相关的技术文章，包括组件开发、Composition API、状态管理、性能优化等实用内容。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">Vue 3 Composition API最佳实践</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">Vue.js性能优化技巧</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">Vue 3源码解析：响应式系统</a>
+                        </div>
+                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
+                </div>
 
-            <!-- 更多分类可以按照相同的模式添加 -->
+                <!-- 分类5 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">CSS技巧</h2>
+                        <span class="category-count">12篇文章</span>
+                    </div>
+                    <p class="category-description">CSS相关的技术文章，包括布局技巧、动画效果、响应式设计、CSS新特性等实用内容。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">CSS Grid布局完全指南：从入门到精通</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">CSS变量和计算属性实现主题切换</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">CSS动画性能优化技巧</a>
+                        </div>
+                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
+                </div>
 
-            <!-- 分页导航 -->
-            <div class="pagination">
-                <button class="pagination-button" disabled>上一页</button>
-                <button class="pagination-button active">1</button>
-                <button class="pagination-button">2</button>
-                <button class="pagination-button">3</button>
-                <span class="pagination-info">...</span>
-                <button class="pagination-button">8</button>
-                <button class="pagination-button">下一页</button>
+                <!-- 分类6 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">性能优化</h2>
+                        <span class="category-count">8篇文章</span>
+                    </div>
+                    <p class="category-description">Web性能优化相关的技术文章，包括加载优化、渲染优化、资源优化、用户体验提升等实用内容。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">Web性能优化：Core Web Vitals详解</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">图片优化最佳实践</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">JavaScript性能优化技巧</a>
+                        </div>
+                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
+                </div>
+
+                <!-- 分类7 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">工程化</h2>
+                        <span class="category-count">8篇文章</span>
+                    </div>
+                    <p class="category-description">前端工程化相关的技术文章，包括构建工具、模块化、自动化测试、CI/CD等实用内容。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">深入浅出Webpack5核心原理</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">Vite vs Webpack：新一代构建工具对比</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">前端自动化测试最佳实践</a>
+                        </div>
+                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
+                </div>
+
+                <!-- 分类8 -->
+                <div class="category-item">
+                    <div class="category-header">
+                        <h2 class="category-name">Node.js</h2>
+                        <span class="category-count">6篇文章</span>
+                    </div>
+                    <p class="category-description">Node.js相关的技术文章，包括服务端开发、API设计、性能优化、最佳实践等实用内容。</p>
+                    <div class="recent-posts">
+                        <h3 class="recent-posts-title">最新文章</h3>
+                        <div class="recent-post-item">
+                            <a href="#">Node.js性能调优实战</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">使用Node.js构建RESTful API</a>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="#">Node.js微服务架构实践</a>
+                        </div>
+                    </div>
+                    <a href="category-detail.html" class="view-all">查看全部 →</a>
+                </div>
             </div>
         </main>
 
-        <!-- 右侧边栏 -->
-        <aside class="sidebar-right">
-            <!-- 热门文章 -->
-            <div class="category-card">
-                <h3 class="card-title">热门文章</h3>
-                <ul class="popular-posts">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <!-- 热门分类 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门分类</h3>
+                <ul class="popular-categories">
                     <li>
-                        <a href="#" class="post-title">TypeScript高级类型与类型体操实战</a>
-                        <div class="post-meta">
-                            <span>阅读：4562</span>
+                        <div class="popular-category-name">
+                            <span class="category-icon">📱</span>
+                            <a href="#">前端开发</a>
                         </div>
+                        <span class="popular-category-count">42</span>
                     </li>
                     <li>
-                        <a href="#" class="post-title">深入浅出Webpack5核心原理</a>
-                        <div class="post-meta">
-                            <span>阅读：3845</span>
+                        <div class="popular-category-name">
+                            <span class="category-icon">🔧</span>
+                            <a href="#">JavaScript</a>
                         </div>
+                        <span class="popular-category-count">28</span>
                     </li>
                     <li>
-                        <a href="#" class="post-title">CSS变量和计算属性实现主题切换</a>
-                        <div class="post-meta">
-                            <span>阅读：3214</span>
+                        <div class="popular-category-name">
+                            <span class="category-icon">⚛️</span>
+                            <a href="#">React</a>
                         </div>
+                        <span class="popular-category-count">16</span>
                     </li>
                     <li>
-                        <a href="#" class="post-title">React性能优化最佳实践</a>
-                        <div class="post-meta">
-                            <span>阅读：2987</span>
+                        <div class="popular-category-name">
+                            <span class="category-icon">🖌️</span>
+                            <a href="#">Vue.js</a>
                         </div>
+                        <span class="popular-category-count">14</span>
                     </li>
                     <li>
-                        <a href="#" class="post-title">前端工程化实践与思考</a>
-                        <div class="post-meta">
-                            <span>阅读：2756</span>
+                        <div class="popular-category-name">
+                            <span class="category-icon">🎨</span>
+                            <a href="#">CSS技巧</a>
                         </div>
+                        <span class="popular-category-count">12</span>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <span class="category-icon">⚡</span>
+                            <a href="#">性能优化</a>
+                        </div>
+                        <span class="popular-category-count">8</span>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <span class="category-icon">🔨</span>
+                            <a href="#">工程化</a>
+                        </div>
+                        <span class="popular-category-count">8</span>
                     </li>
                 </ul>
             </div>
 
             <!-- 标签云 -->
-            <div class="category-card">
-                <h3 class="card-title">标签云</h3>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门标签</h3>
                 <div class="tag-cloud">
                     <a href="#">JavaScript</a>
-                    <a href="#">TypeScript</a>
                     <a href="#">React</a>
                     <a href="#">Vue.js</a>
-                    <a href="#">Angular</a>
-                    <a href="#">Node.js</a>
-                    <a href="#">Webpack</a>
-                    <a href="#">Vite</a>
                     <a href="#">CSS</a>
                     <a href="#">HTML5</a>
+                    <a href="#">TypeScript</a>
+                    <a href="#">Webpack</a>
+                    <a href="#">Node.js</a>
                     <a href="#">性能优化</a>
-                    <a href="#">前端工程化</a>
-                    <a href="#">微前端</a>
-                    <a href="#">状态管理</a>
-                    <a href="#">组件设计</a>
                     <a href="#">响应式设计</a>
-                    <a href="#">浏览器原理</a>
-                    <a href="#">HTTP协议</a>
-                    <a href="#">Web安全</a>
-                    <a href="#">前端测试</a>
+                    <a href="#">前端工程化</a>
+                    <a href="#">组件设计</a>
+                    <a href="#">Hooks</a>
+                    <a href="#">状态管理</a>
+                    <a href="#">微前端</a>
                 </div>
+            </div>
+
+            <!-- 最新文章 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">最新文章</h3>
+                <ul class="popular-categories">
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">深入理解JavaScript中的闭包及其应用场景</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">React Hooks最佳实践与常见陷阱</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">CSS Grid布局完全指南：从入门到精通</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">Vue 3 Composition API最佳实践</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">Web性能优化：Core Web Vitals详解</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </aside>
     </div>
@@ -807,11 +706,11 @@
                 <div class="footer-section">
                     <h3 class="footer-title">博客分类</h3>
                     <ul class="footer-links">
-                        <li><a href="#frontend">前端开发</a></li>
-                        <li><a href="#javascript">JavaScript</a></li>
-                        <li><a href="#react">框架与库</a></li>
-                        <li><a href="#performance">性能优化</a></li>
-                        <li><a href="#engineering">工程化实践</a></li>
+                        <li><a href="#">前端开发</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">框架与库</a></li>
+                        <li><a href="#">性能优化</a></li>
+                        <li><a href="#">工程化实践</a></li>
                     </ul>
                 </div>
 
@@ -832,6 +731,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>

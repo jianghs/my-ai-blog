@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我 - 技术博客</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0077cc;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #005fa3;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #2e3846;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            color: white;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #66b1ff;
+        }
+
+        .nav-menu a.active {
+            color: #66b1ff;
+            border-bottom: 2px solid #66b1ff;
+            padding-bottom: 5px;
+        }
+
+        .search-box {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .search-box input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-box button {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        /* 主内容区样式 */
+        .main-content {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .about-container {
+            background-color: white;
+            border-radius: 5px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .about-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .about-content {
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+        }
+
+        .profile-info {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 30px;
+            border: 5px solid #f0f0f0;
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .profile-title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .profile-bio {
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            margin-right: 15px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links a i {
+            margin-right: 5px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .skill-category {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+
+        .skill-category h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background-color: #0077cc;
+        }
+
+        .timeline {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #e0e0e0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -5px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #0077cc;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #0077cc;
+        }
+
+        .timeline-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .timeline-company {
+            color: #666;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .contact-form {
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #005fa3;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #2e3846;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        .footer-section:last-child {
+            margin-right: 0;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .profile-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .search-box {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .skill-category {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">技术博客</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="article.html">文章</a></li>
+                    <li><a href="category.html">分类</a></li>
+                    <li><a href="tags.html">标签</a></li>
+                    <li><a href="archive.html">归档</a></li>
+                    <li><a href="about.html" class="active">关于</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索文章...">
+                <button type="submit">搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="container main-content">
+        <div class="about-container">
+            <h1 class="page-title">关于我</h1>
+
+            <!-- 个人简介 -->
+            <div class="about-section">
+                <div class="profile-info">
+                    <img src="https://via.placeholder.com/150" alt="张三的头像" class="profile-avatar">
+                    <div class="profile-details">
+                        <h2 class="profile-name">张三</h2>
+                        <div class="profile-title">资深前端开发工程师 / 技术博主</div>
+                        <p class="profile-bio">我是一名拥有6年经验的前端开发工程师，专注于现代Web应用开发。热爱技术分享和开源项目，致力于探索前端技术的最佳实践和创新应用。在工作之余，我喜欢通过博客分享我的技术心得和实践经验，希望能帮助更多的开发者成长。</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="#"><i class="fab fa-zhihu"></i> 知乎</a>
+                            <a href="#"><i class="fas fa-envelope"></i> 联系我</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 关于博客 -->
+            <div class="about-section">
+                <h3 class="section-title">关于这个博客</h3>
+                <div class="about-content">
+                    <p>这个技术博客创建于2020年，主要记录我在前端开发领域的学习心得、技术实践和经验总结。博客内容涵盖JavaScript、TypeScript、React、Vue.js、CSS、性能优化、工程化实践等多个方面。</p>
+                    <p>创建这个博客的初衷是希望能够通过文字的形式整理自己的技术思考，同时也为开发社区贡献一份力量。我相信知识的价值在于分享和传播，也希望通过写作来提升自己的技术深度和广度。</p>
+                    <p>如果你对博客内容有任何建议或反馈，欢迎通过底部的联系方式与我交流。也欢迎志同道合的朋友一起探讨技术，共同进步。</p>
+                </div>
+            </div>
+
+            <!-- 技能专长 -->
+            <div class="about-section">
+                <h3 class="section-title">技能专长</h3>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h4>前端开发</h4>
+                        <div class="skill-item">
+                            <div class="skill-name">JavaScript / TypeScript</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">HTML5 / CSS3</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">React</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Vue.js</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>工程化与工具</h4>
+                        <div class="skill-item">
+                            <div class="skill-name">Webpack / Vite</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Git</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Jest / Testing Library</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">CI/CD</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>后端与其他</h4>
+                        <div class="skill-item">
+                            <div class="skill-name">Node.js</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 82%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Express / Koa</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 78%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">MongoDB / MySQL</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Docker</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 工作经历 -->
+            <div class="about-section">
+                <h3 class="section-title">工作经历</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2021年至今</div>
+                        <div class="timeline-title">高级前端开发工程师</div>
+                        <div class="timeline-company">ABC科技有限公司</div>
+                        <div class="timeline-content">
+                            <p>负责公司核心产品的前端架构设计和开发，带领团队完成多个重要项目。推动前端工程化实践，优化开发流程，提升团队效率。主导技术选型和技术栈升级，将传统应用迁移到现代前端框架。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2019年 - 2021年</div>
+                        <div class="timeline-title">前端开发工程师</div>
+                        <div class="timeline-company">XYZ互联网公司</div>
+                        <div class="timeline-content">
+                            <p>参与公司电商平台的前端开发，负责用户界面设计和实现。使用React和Redux构建高性能的单页应用，优化页面加载速度和用户体验。参与前端组件库的开发和维护，提高团队开发效率。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2017年 - 2019年</div>
+                        <div class="timeline-title">初级前端开发工程师</div>
+                        <div class="timeline-company">DEF网络科技有限公司</div>
+                        <div class="timeline-content">
+                            <p>参与公司官网和内部系统的前端开发，负责页面实现和交互效果。使用HTML5、CSS3和JavaScript实现响应式设计，确保在不同设备上的良好显示效果。学习并应用前端新技术，不断提升自己的技术能力。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 联系我 -->
+            <div class="about-section">
+                <h3 class="section-title">联系我</h3>
+                <div class="about-content">
+                    <p>如果你对我的博客内容有任何问题、建议或者合作意向，欢迎通过以下方式联系我：</p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>邮箱：example@example.com</li>
+                        <li>微信：zhangsan_dev</li>
+                        <li>GitHub：github.com/zhangsan</li>
+                    </ul>
+                    <p>也可以通过下面的表单直接给我留言：</p>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">您的姓名</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">电子邮箱</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="form-label">主题</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">留言内容</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">发送留言</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">关于博客</h3>
+                    <p style="color: #ccc; margin-bottom: 15px;">这是一个专注于前端技术分享的个人博客，记录学习心得与技术实践，希望能帮助到更多的开发者。</p>
+                    <div class="profile-links" style="justify-content: flex-start;">
+                        <a href="#">GitHub</a>
+                        <a href="#">知乎</a>
+                        <a href="#">微博</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">博客分类</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">前端开发</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">框架与库</a></li>
+                        <li><a href="#">性能优化</a></li>
+                        <li><a href="#">工程化实践</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">友情链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">MDN Web 文档</a></li>
+                        <li><a href="#">CSS-Tricks</a></li>
+                        <li><a href="#">JavaScript.info</a></li>
+                        <li><a href="#">React 官方文档</a></li>
+                        <li><a href="#">Vue.js 官方文档</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 技术博客 | 设计与开发：张三 | <a href="#" style="color: #ccc;">隐私政策</a> | <a href="#" style="color: #ccc;">使用条款</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

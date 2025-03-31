@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端开发 - 分类文章列表</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0077cc;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #005fa3;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #2e3846;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            color: white;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #66b1ff;
+        }
+
+        .nav-menu a.active {
+            color: #66b1ff;
+            border-bottom: 2px solid #66b1ff;
+            padding-bottom: 5px;
+        }
+
+        .search-box {
+            display: flex;
+            margin-left: 20px;
+        }
+
+        .search-box input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            width: 200px;
+        }
+
+        .search-box button {
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        /* 主内容区样式 */
+        .main-content {
+            display: flex;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .page-description {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+            max-width: 800px;
+        }
+
+        /* 内容区样式 */
+        .content {
+            flex: 1;
+        }
+
+        /* 文章列表样式 */
+        .article-list {
+            margin-bottom: 30px;
+        }
+
+        .article-item {
+            background-color: white;
+            border-radius: 5px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .article-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .article-meta span {
+            margin-right: 15px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .article-excerpt {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            padding: 3px 8px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #666;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .tag:hover {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .read-more {
+            display: inline-block;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .pagination a, .pagination span {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 0 5px;
+            border-radius: 4px;
+            background-color: white;
+            color: #333;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination .active {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        /* 侧边栏样式 */
+        .sidebar {
+            width: 280px;
+            margin-left: 30px;
+        }
+
+        .sidebar-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .popular-categories li {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popular-categories li:last-child {
+            margin-bottom: 0;
+        }
+
+        .popular-category-name {
+            display: flex;
+            align-items: center;
+        }
+
+        .category-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+
+        .popular-category-count {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .tag-cloud a {
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #2e3846;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin-right: 30px;
+        }
+
+        .footer-section:last-child {
+            margin-right: 0;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+
+            .search-box {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">技术博客</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="article.html">文章</a></li>
+                    <li><a href="category.html" class="active">分类</a></li>
+                    <li><a href="tags.html">标签</a></li>
+                    <li><a href="archive.html">归档</a></li>
+                    <li><a href="about.html">关于</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <input type="text" placeholder="搜索文章...">
+                <button type="submit">搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="container main-content">
+        <!-- 内容区 -->
+        <main class="content">
+            <h1 class="page-title">前端开发</h1>
+            <p class="page-description">前端开发相关的技术文章，包括HTML、CSS、JavaScript等基础知识，以及现代前端开发的各种技术和最佳实践。</p>
+
+            <!-- 文章列表 -->
+            <div class="article-list">
+                <!-- 文章1 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">现代前端工程化实践与思考</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-05-20</span>
+                        <span>作者：张三</span>
+                        <span>阅读：1520</span>
+                        <span>评论：8</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">工程化</a>
+                        <a href="#" class="tag">Webpack</a>
+                    </div>
+                    <p class="article-excerpt">
+                        随着前端技术的快速发展，前端工程化已经成为现代Web开发不可或缺的一部分。本文将探讨前端工程化的核心概念、常见工具和最佳实践，帮助开发者构建高效、可维护的前端项目。从模块化、组件化、规范化到自动化，我们将全面分析前端工程化的各个方面...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章2 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">前端性能优化的20个实用技巧</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-05-15</span>
+                        <span>作者：张三</span>
+                        <span>阅读：2340</span>
+                        <span>评论：12</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">性能优化</a>
+                        <a href="#" class="tag">用户体验</a>
+                    </div>
+                    <p class="article-excerpt">
+                        网站性能对用户体验和转化率有着直接影响。本文总结了20个前端性能优化的实用技巧，涵盖资源加载、渲染优化、代码效率等多个方面。通过这些技巧，你可以显著提升网站的加载速度和响应性能，为用户提供更流畅的浏览体验...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章3 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">Web Components入门与实践</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-05-10</span>
+                        <span>作者：李四</span>
+                        <span>阅读：1820</span>
+                        <span>评论：6</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">Web Components</a>
+                        <a href="#" class="tag">组件化</a>
+                    </div>
+                    <p class="article-excerpt">
+                        Web Components是一套不同的技术，允许你创建可复用的自定义元素，它们的功能封装在你的代码之外。本文将介绍Web Components的核心技术（Custom Elements、Shadow DOM和HTML Templates），并通过实例展示如何创建和使用自定义组件...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章4 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">响应式设计最佳实践</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-05-05</span>
+                        <span>作者：王五</span>
+                        <span>阅读：1650</span>
+                        <span>评论：9</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">响应式设计</a>
+                        <a href="#" class="tag">CSS</a>
+                    </div>
+                    <p class="article-excerpt">
+                        随着移动设备的普及，响应式设计已成为前端开发的标准实践。本文将分享响应式设计的核心原则和最佳实践，包括流式布局、弹性图片、媒体查询的高级用法，以及常见的响应式设计模式。通过这些技巧，你可以创建在各种设备上都能提供出色用户体验的网站...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章5 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">现代CSS布局技术详解</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-04-28</span>
+                        <span>作者：张三</span>
+                        <span>阅读：1980</span>
+                        <span>评论：11</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">CSS</a>
+                        <a href="#" class="tag">布局</a>
+                    </div>
+                    <p class="article-excerpt">
+                        CSS布局技术在近年来有了长足的发展，从传统的浮动和定位，到Flexbox和Grid布局的广泛应用。本文将深入探讨现代CSS布局技术，包括Flexbox和Grid的高级用法、多列布局、粘性定位等，并通过实例展示如何解决复杂的布局需求...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章6 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">前端安全最佳实践</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-04-22</span>
+                        <span>作者：赵六</span>
+                        <span>阅读：1420</span>
+                        <span>评论：7</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">安全</a>
+                        <a href="#" class="tag">最佳实践</a>
+                    </div>
+                    <p class="article-excerpt">
+                        前端安全是Web应用开发中不可忽视的一环。本文将介绍常见的前端安全威胁（如XSS、CSRF、点击劫持等）及其防御策略，帮助开发者构建更安全的Web应用。我们将讨论内容安全策略(CSP)、HTTPS、安全的认证和授权实践，以及如何进行安全审计...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章7 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">前端测试策略与实践</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-04-18</span>
+                        <span>作者：李四</span>
+                        <span>阅读：1280</span>
+                        <span>评论：5</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">测试</a>
+                        <a href="#" class="tag">自动化</a>
+                    </div>
+                    <p class="article-excerpt">
+                        测试是保证前端应用质量的关键环节。本文将介绍前端测试的不同类型（单元测试、集成测试、端到端测试）及其实现方法，探讨如何构建有效的测试策略，以及常用的测试工具和框架。通过实例，我们将展示如何编写可维护的测试用例，以及如何将测试集成到开发流程中...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章8 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">渐进式Web应用(PWA)开发指南</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-04-12</span>
+                        <span>作者：张三</span>
+                        <span>阅读：1560</span>
+                        <span>评论：8</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">PWA</a>
+                        <a href="#" class="tag">离线应用</a>
+                    </div>
+                    <p class="article-excerpt">
+                        渐进式Web应用(PWA)结合了Web和原生应用的优点，提供了更好的用户体验。本文将介绍PWA的核心技术（Service Worker、Web App Manifest、Push API等），并通过实例展示如何将现有Web应用转变为PWA。我们将讨论离线功能、推送通知、安装体验等方面的实现...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章9 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">前端国际化实践指南</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-04-08</span>
+                        <span>作者：王五</span>
+                        <span>阅读：1320</span>
+                        <span>评论：6</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">国际化</a>
+                        <a href="#" class="tag">本地化</a>
+                    </div>
+                    <p class="article-excerpt">
+                        随着全球化的发展，Web应用的国际化变得越来越重要。本文将介绍前端国际化的核心概念和最佳实践，包括文本翻译、日期和数字格式化、RTL布局支持等。我们将探讨常用的国际化库和工具，以及如何设计支持多语言的前端架构...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+
+                <!-- 文章10 -->
+                <article class="article-item">
+                    <h2 class="article-title">
+                        <a href="article-detail.html">Web动画技术与性能优化</a>
+                    </h2>
+                    <div class="article-meta">
+                        <span>发布于：2023-04-02</span>
+                        <span>作者：张三</span>
+                        <span>阅读：1680</span>
+                        <span>评论：9</span>
+                    </div>
+                    <div class="article-tags">
+                        <a href="#" class="tag">前端开发</a>
+                        <a href="#" class="tag">动画</a>
+                        <a href="#" class="tag">性能</a>
+                    </div>
+                    <p class="article-excerpt">
+                        Web动画可以显著提升用户体验，但也可能带来性能问题。本文将介绍现代Web动画技术（CSS动画、JavaScript动画、SVG动画、Canvas动画等），并探讨如何创建高性能的动画效果。我们将分析常见的性能瓶颈，并提供优化策略，帮助开发者创建流畅、高效的Web动画...
+                    </p>
+                    <a href="article-detail.html" class="read-more">阅读全文 →</a>
+                </article>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination">
+                <span class="active">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">下一页 →</a>
+            </div>
+        </main>
+
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <!-- 热门分类 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门分类</h3>
+                <ul class="popular-categories">
+                    <li>
+                        <div class="popular-category-name">
+                            <span class="category-icon">📱</span>
+                            <a href="#">前端开发</a>
+                        </div>
+                        <span class="popular-category-count">42</span>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <span class="category-icon">🔧</span>
+                            <a href="#">JavaScript</a>
+                        </div>
+                        <span class="popular-category-count">28</span>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <span class="category-icon">⚛️</span>
+                            <a href="#">React</a>
+                        </div>
+                        <span class="popular-category-count">16</span>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <span class="category-icon">🖌️</span>
+                            <a href="#">Vue.js</a>
+                        </div>
+                        <span class="popular-category-count">14</span>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <span class="category-icon">🎨</span>
+                            <a href="#">CSS技巧</a>
+                        </div>
+                        <span class="popular-category-count">12</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 标签云 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门标签</h3>
+                <div class="tag-cloud">
+                    <a href="#">JavaScript</a>
+                    <a href="#">HTML5</a>
+                    <a href="#">CSS</a>
+                    <a href="#">响应式设计</a>
+                    <a href="#">性能优化</a>
+                    <a href="#">组件化</a>
+                    <a href="#">工程化</a>
+                    <a href="#">动画</a>
+                    <a href="#">布局</a>
+                    <a href="#">安全</a>
+                    <a href="#">测试</a>
+                    <a href="#">PWA</a>
+                    <a href="#">国际化</a>
+                </div>
+            </div>
+
+            <!-- 热门文章 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">热门文章</h3>
+                <ul class="popular-categories">
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">前端性能优化的20个实用技巧</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">现代前端工程化实践与思考</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">现代CSS布局技术详解</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">Web Components入门与实践</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="popular-category-name">
+                            <a href="#">渐进式Web应用(PWA)开发指南</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+<!-- 页脚 -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">关于博客</h3>
+                <p style="color: #ccc; margin-bottom: 15px;">这是一个专注于前端技术分享的个人博客，记录学习心得与技术实践，希望能帮助到更多的开发者。</p>
+                <div class="profile-links" style="justify-content: flex-start;">
+                    <a href="#">GitHub</a>
+                    <a href="#">知乎</a>
+                    <a href="#">微博</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3 class="footer-title">博客分类</h3>
+                <ul class="footer-links">
+                    <li><a href="#">前端开发</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                    <li><a href="#">框架与库</a></li>
+                    <li><a href="#">性能优化</a></li>
+                    <li><a href="#">工程化实践</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3 class="footer-title">友情链接</h3>
+                <ul class="footer-links">
+                    <li><a href="#">MDN Web 文档</a></li>
+                    <li><a href="#">CSS-Tricks</a></li>
+                    <li><a href="#">JavaScript.info</a></li>
+                    <li><a href="#">React 官方文档</a></li>
+                    <li><a href="#">Vue.js 官方文档</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2023 技术博客 | 设计与开发：张三 | <a href="#" style="color: #ccc;">隐私政策</a> | <a href="#" style="color: #ccc;">使用条款</a></p>
+        </div>
+    </div>
+</footer>
