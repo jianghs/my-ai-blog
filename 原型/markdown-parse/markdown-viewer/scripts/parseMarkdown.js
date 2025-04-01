@@ -58,7 +58,7 @@ function emptyDirectory(dir) {
 
 // 解析 Markdown 文件
 function parseMarkdownFiles(fullMode = false) {
-  const publicDir = path.join(rootDir, 'public');
+  const publicDir = path.join(rootDir, 'md');
   const mdFiles = findMarkdownFiles(publicDir);
 
   // 如果是全量模式，清空目标目录和元数据

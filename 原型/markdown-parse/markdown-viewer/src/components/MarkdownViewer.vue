@@ -6,7 +6,7 @@
     <div v-else>
       <!-- 文章头部 -->
       <header class="article-header">
-        <h1 class="article-title">{{ metadata.title || '无标题' }}</h1>
+        <h1 class="article-title">{{ metadata.title || '' }}</h1>
         <div class="article-meta">
           <span v-if="metadata.date">发布于：{{ formatDate(metadata.date) }}</span>
           <span v-if="metadata.author">作者：{{ metadata.author }}</span>

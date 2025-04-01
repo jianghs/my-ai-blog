@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "parseMarkdown": "node scripts/parseMarkdown.js",
-    "parseMarkdown:full": "node scripts/parseMarkdown.js --full",
-    "dev": "npm run parseMarkdown && vite",
-    "build": "npm run parseMarkdown && vite build",
-    "build:full": "npm run parseMarkdown:full && vite build",
+    "parse": "node scripts/parseMarkdown.js",
+    "parse:full": "node scripts/parseMarkdown.js --full",
+    "clean": "node scripts/clean.js",
+    "dev": "npm run parse && vite",
+    "build": "npm run parse && vite build",
+    "build:full": "npm run parse:full && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
