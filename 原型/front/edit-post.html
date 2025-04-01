@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑文章 - 我的技术博客</title>
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0077cc;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #005fa3;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #2e3846;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 20px;
+        }
+
+        .nav-menu a {
+            color: white;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #66b1ff;
+        }
+
+        .nav-menu a.active {
+            color: #66b1ff;
+            border-bottom: 2px solid #66b1ff;
+            padding-bottom: 5px;
+        }
+
+        /* 主内容区样式 */
+        .main-content {
+            margin: 30px auto;
+            max-width: 1000px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #0077cc;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0,119,204,0.1);
+        }
+
+        /* 标签输入区域 */
+        .tags-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            min-height: 46px;
+        }
+
+        .tags-input-container:focus-within {
+            border-color: #0077cc;
+            box-shadow: 0 0 0 3px rgba(0,119,204,0.1);
+        }
+
+        .tag-item {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .tag-item .remove-tag {
+            margin-left: 5px;
+            cursor: pointer;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .tag-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 14px;
+            min-width: 100px;
+        }
+
+        /* 编辑器工具栏 */
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .toolbar-btn {
+            padding: 6px 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #444;
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .toolbar-separator {
+            width: 1px;
+            height: 24px;
+            background-color: #ddd;
+            margin: 0 5px;
+        }
+
+        /* Markdown编辑器 */
+        .markdown-editor {
+            width: 100%;
+            min-height: 400px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 0 0 4px 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        /* 预览区域 */
+        .preview-container {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .preview-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .preview-content {
+            line-height: 1.8;
+        }
+
+        .preview-content h1,
+        .preview-content h2,
+        .preview-content h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .preview-content p {
+            margin-bottom: 15px;
+        }
+
+        .preview-content pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+
+        .preview-content code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .preview-content blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 15px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .preview-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+        }
+
+        .preview-content ul,
+        .preview-content ol {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .preview-content li {
+            margin-bottom: 5px;
+        }
+
+        /* 按钮样式 */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #0077cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #005fa3;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #bd2130;
+        }
+
+        /* 文章设置面板 */
+        .post-settings {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+
+        .settings-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            margin-right: 10px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">技术博客</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="article.html">文章</a></li>
+                    <li><a href="category.html">分类</a></li>
+                    <li><a href="tags.html">标签</a></li>
+                    <li><a href="archive.html">归档</a></li>
+                    <li><a href="about.html">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="container main-content">
+        <h1 class="page-title">编写新文章</h1>
+
+        <!-- 文章编辑表单 -->
+        <form id="post-form">
+            <!-- 文章标题 -->
+            <div class="form-group">
+                <label for="post-title" class="form-label">文章标题</label>
+                <input type="text" id="post-title" class="form-control" placeholder="请输入文章标题" required>
+            </div>
+
+            <!-- 文章分类 -->
+            <div class="form-group">
+                <label for="post-category" class="form-label">文章分类</label>
+                <select id="post-category" class="form-control" required>
+                    <option value="">请选择分类</option>
+                    <option value="frontend">前端开发</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="react">React</option>
+                    <option value="vue">Vue.js</option>
+                    <option value="css">CSS技巧</option>
+                    <option value="performance">性能优化</option>
+                    <option value="engineering">工程化</option>
+                </select>
+            </div>
+
+            <!-- 文章标签 -->
+            <div class="form-group">
+                <label for="post-tags" class="form-label">文章标签</label>
+                <div class="tags-input-container" id="tags-container">
+                    <span class="tag-item">JavaScript <span class="remove-tag">×</span></span>
+                    <span class="tag-item">前端 <span class="remove-tag">×</span></span>
+                    <input type="text" class="tag-input" id="tag-input" placeholder="输入标签后按回车添加">
+                </div>
+                <small style="color: #666; margin-top: 5px; display: block;">添加多个标签，用回车键分隔</small>
+            </div>
+
+            <!-- Markdown编辑器 -->
+            <div class="form-group">
+                <label for="post-content" class="form-label">文章内容</label>
+                <div class="editor-toolbar">
+                    <button type="button" class="toolbar-btn" title="标题">H</button>
+                    <button type="button" class="toolbar-btn" title="粗体">B</button>
+                    <button type="button" class="toolbar-btn" title="斜体">I</button>
+                    <div class="toolbar-separator"></div>
+                    <button type="button" class="toolbar-btn" title="链接">🔗</button>
+                    <button type="button" class="toolbar-btn" title="图片">🖼️</button>
+                    <button type="button" class="toolbar-btn" title="代码块">{"}</button>
+                    <button type="button" class="toolbar-btn" title="引用">❝</button>
+                    <div class="toolbar-separator"></div>
+                    <button type="button" class="toolbar-btn" title="无序列表">•</button>
+                    <button type="button" class="toolbar-btn" title="有序列表">1.</button>
+                    <div class="toolbar-separator"></div>
+                    <button type="button" class="toolbar-btn" title="预览">👁️</button>
+                </div>
+                <textarea id="post-content" class="markdown-editor" placeholder="在这里使用Markdown编写文章内容..." required>
+# 深入理解JavaScript中的闭包及其应用场景
+
+闭包是JavaScript中一个强大而复杂的特性，它允许函数访问并操作函数外部的变量。本文将深入探讨闭包的工作原理、内存管理问题以及在实际开发中的常见应用场景。
+
+## 什么是闭包？
+
+简单来说，闭包是指有权访问另一个函数作用域中的变量的函数。当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。
+
+```javascript
+function createCounter() {
+    let count = 0;
+    return function() {
+        return ++count;
+    };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+                </textarea>
+
+        <!-- 预览区域 -->
+        <div class="preview-container" style="display: none;">
+            <h3 class="preview-title">预览</h3>
+            <div class="preview-content" id="preview-content"></div>
+        </div>
+
+        <!-- 文章设置 -->
+        <div class="post-settings">
+            <h3 class="settings-title">文章设置</h3>
+
+            <div class="checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="featured-post"> 设为精选文章
+                </label>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="allow-comments" checked> 允许评论
+                </label>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="publish-now" checked> 立即发布
+                </label>
+            </div>
+
+            <div class="form-group" id="schedule-container" style="display: none;">
+                <label for="schedule-date" class="form-label">计划发布时间</label>
+                <input type="datetime-local" id="schedule-date" class="form-control">
+            </div>
+        </div>
+
+        <!-- 按钮区域 -->
+        <div class="btn-container">
+            <div>
+                <button type="button" class="btn btn-secondary" id="save-draft">保存草稿</button>
+                <button type="button" class="btn btn-secondary" id="preview-btn">预览</button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-danger" id="cancel-btn">取消</button>
+                <button type="submit" class="btn btn-primary" id="publish-btn">发布文章</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 标签输入处理
+        const tagInput = document.getElementById('tag-input');
+        const tagsContainer = document.getElementById('tags-container');
+
+        tagInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const tagText = this.value.trim();
+                if (tagText) {
+                    addTag(tagText);
+                    this.value = '';
+                }
+            }
+        });
+
+        // 删除标签
+        tagsContainer.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-tag')) {
+                e.target.parentElement.remove();
+            }
+        });
+
+        function addTag(text) {
+            const tag = document.createElement('span');
+            tag.className = 'tag-item';
+            tag.innerHTML = `${text} <span class="remove-tag">×</span>`;
+            tagsContainer.insertBefore(tag, tagInput);
+        }
+
+        // 预览切换
+        const previewBtn = document.getElementById('preview-btn');
+        const previewContainer = document.querySelector('.preview-container');
+        const editorContainer = document.querySelector('.markdown-editor');
+        const previewContent = document.getElementById('preview-content');
+
+        previewBtn.addEventListener('click', function() {
+            const content = document.getElementById('post-content').value;
+            // 这里应该有Markdown转HTML的逻辑，简化处理
+            previewContent.innerHTML = `<h1>预览模式</h1><p>${content}</p>`;
+
+            if (previewContainer.style.display === 'none') {
+                previewContainer.style.display = 'block';
+                previewBtn.textContent = '返回编辑';
+                editorContainer.style.display = 'none';
+            } else {
+                previewContainer.style.display = 'none';
+                previewBtn.textContent = '预览';
+                editorContainer.style.display = 'block';
+            }
+        });
+
+        // 计划发布时间显示控制
+        const publishNowCheckbox = document.getElementById('publish-now');
+        const scheduleContainer = document.getElementById('schedule-container');
+
+        publishNowCheckbox.addEventListener('change', function() {
+            scheduleContainer.style.display = this.checked ? 'none' : 'block';
+        });
+
+        // 编辑器工具栏功能
+        const toolbar = document.querySelector('.editor-toolbar');
+        const editor = document.getElementById('post-content');
+
+        toolbar.addEventListener('click', function(e) {
+            if (e.target.classList.contains('toolbar-btn')) {
+                const action = e.target.title;
+                const selectionStart = editor.selectionStart;
+                const selectionEnd = editor.selectionEnd;
+                const selectedText = editor.value.substring(selectionStart, selectionEnd);
+
+                let insertText = '';
+
+                switch(action) {
+                    case '标题':
+                        insertText = `\n## ${selectedText || '标题'}\n`;
+                        break;
+                    case '粗体':
+                        insertText = `**${selectedText || '粗体文本'}**`;
+                        break;
+                    case '斜体':
+                        insertText = `*${selectedText || '斜体文本'}*`;
+                        break;
+                    case '链接':
+                        insertText = `[${selectedText || '链接文本'}](https://example.com)`;
+                        break;
+                    case '图片':
+                        insertText = `![${selectedText || '图片描述'}](https://example.com/image.jpg)`;
+                        break;
+                    case '代码块':
+                        insertText = `\n\`\`\`javascript\n${selectedText || '// 代码'}\n\`\`\`\n`;
+                        break;
+                    case '引用':
+                        insertText = `\n> ${selectedText || '引用文本'}\n`;
+                        break;
+                    case '无序列表':
+                        insertText = `\n- ${selectedText || '列表项'}\n`;
+                        break;
+                    case '有序列表':
+                        insertText = `\n1. ${selectedText || '列表项'}\n`;
+                        break;
+                    case '预览':
+                        // 预览按钮的逻辑已在上面处理
+                        return;
+                }
+
+                // 插入文本
+                editor.focus();
+                document.execCommand('insertText', false, insertText);
+
+                // 如果浏览器不支持execCommand
+                if (editor.value.indexOf(insertText) === -1) {
+                    const value = editor.value;
+                    editor.value = value.substring(0, selectionStart) + insertText + value.substring(selectionEnd);
+                }
+            }
+        });
+
+        // 表单提交
+        document.getElementById('post-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('文章已发布！');
+            // 这里应该有表单提交的逻辑
+        });
+
+        // 保存草稿
+        document.getElementById('save-draft').addEventListener('click', function() {
+            alert('草稿已保存！');
+            // 这里应该有保存草稿的逻辑
+        });
+
+        // 取消按钮
+        document.getElementById('cancel-btn').addEventListener('click', function() {
+            if (confirm('确定要取消编辑吗？未保存的内容将会丢失。')) {
+                window.location.href = 'index.html';
+            }
+        });
+    });
+</script>
