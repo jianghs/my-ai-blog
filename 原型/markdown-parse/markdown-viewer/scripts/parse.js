@@ -21,13 +21,13 @@ marked.setOptions({
 });
 
 // 确保目标目录存在
-const postsDir = path.join(rootDir, 'src', 'posts');
+const postsDir = path.join(rootDir, 'posts');
 if (!fs.existsSync(postsDir)) {
   fs.mkdirSync(postsDir, { recursive: true });
 }
 
 // 缓存文件路径
-const cacheFilePath = path.join(rootDir, 'src', 'postMetadata.json');
+const cacheFilePath = path.join(rootDir, 'postMetadata.json');
 
 // 检查文件是否需要更新（通过比较修改时间）
 function isFileUpdated(srcPath, destPath) {

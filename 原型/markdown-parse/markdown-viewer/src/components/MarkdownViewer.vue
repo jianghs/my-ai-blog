@@ -35,7 +35,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import postMetadata from '../postMetadata.json';
+import postMetadata from '../../postMetadata.json';
 
 export default {
   name: 'MarkdownViewer',
@@ -92,7 +92,7 @@ export default {
         metadata.value = postMeta;
 
         // 加载HTML内容
-        const htmlPath = `/src/posts/${postMeta.htmlPath}`;
+        const htmlPath = `posts/${postMeta.htmlPath}`;
         const response = await fetch(htmlPath);
 
         if (!response.ok) {
@@ -238,13 +238,13 @@ export default {
   margin-bottom: 0.5em;
 }
 
-.article-content pre {
-  /* background-color: #eee;
+/* .article-content pre {
+  background-color: #eee;
   border-radius: 3px;
   padding: 16px;
   overflow: auto;
-  margin-bottom: 1em; */
-}
+  margin-bottom: 1em;
+}*/
 
 .article-content code {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
@@ -254,12 +254,12 @@ export default {
   border-radius: 3px;
 }
 
-.article-content pre code {
-  /* background-color: transparent; */
-  /* padding: 0; */
-  /* font-size: 0.9em; */
-  /* line-height: 1.5; */
-}
+/* .article-content pre code {
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+} */
 
 .article-content blockquote {
   border-left: 4px solid #ddd;

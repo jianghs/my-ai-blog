@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "parse": "node scripts/parseMarkdown.js",
-    "parse:full": "node scripts/parseMarkdown.js --full",
+    "parse": "node scripts/parse.js",
+    "parse:full": "node scripts/parse.js --full",
     "clean": "node scripts/clean.js",
     "dev": "npm run parse && vite",
     "build": "npm run parse && vite build",
