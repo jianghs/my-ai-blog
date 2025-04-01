@@ -5,7 +5,10 @@
     </header>
 
     <main class="app-content">
-      <MarkdownViewer :filePath="markdownFilePath" />
+      <div v-if="!postId" class="no-post">
+        <p>请在 URL 中添加 ?postId=文章ID 来查看文章</p>
+      </div>
+      <MarkdownViewer v-else :postId="postId" />
     </main>
 
     <footer class="app-footer">
@@ -15,7 +18,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import MarkdownViewer from './components/MarkdownViewer.vue';
 
 export default {
@@ -24,12 +27,23 @@ export default {
     MarkdownViewer
   },
   setup() {
-    // 这里设置 Markdown 文件路径
-    // 在实际应用中，可以通过路由参数或其他方式动态设置
-    const markdownFilePath = ref('/test.md');
+    const postId = ref('');
+
+    onMounted(() => {
+      // 从 URL 参数中获取 postId
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('postId');
+
+      if (id) {
+        postId.value = id;
+        console.log('加载文章:', id);
+      } else {
+        console.log('未提供 postId 参数');
+      }
+    });
 
     return {
-      markdownFilePath
+      postId
     };
   }
 };
@@ -70,6 +84,15 @@ body {
   margin: 0 auto;
   width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.no-post {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin: 20px 0;
 }
 
 .app-footer {

@@ -35,12 +35,12 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { parseMarkdown } from '../utils/markdownService';
+import postMetadata from '../postMetadata.json';
 
 export default {
   name: 'MarkdownViewer',
   props: {
-    filePath: {
+    postId: {
       type: String,
       required: true
     }
@@ -77,22 +77,32 @@ export default {
       return Array.isArray(tags) ? tags : [];
     };
 
-    // 加载 Markdown 文件
-    const loadMarkdownFile = async () => {
+    // 加载 HTML 文件
+    const loadHtmlFile = async () => {
       try {
         isLoading.value = true;
-        const response = await fetch(props.filePath);
+
+        // 从元数据缓存中获取文章信息
+        const postMeta = postMetadata[props.postId];
+        if (!postMeta) {
+          throw new Error(`找不到ID为 ${props.postId} 的文章元数据`);
+        }
+
+        // 设置元数据
+        metadata.value = postMeta;
+
+        // 加载HTML内容
+        const htmlPath = `/src/posts/${postMeta.htmlPath}`;
+        const response = await fetch(htmlPath);
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const content = await response.text();
-        const { metadata: meta, htmlContent: html } = parseMarkdown(content);
-
-        metadata.value = meta;
-        htmlContent.value = html;
+        htmlContent.value = content;
       } catch (error) {
-        console.error('加载 Markdown 文件时出错:', error);
+        console.error('加载HTML文件时出错:', error);
         htmlContent.value = `<p class="error">加载文件时出错: ${error.message}</p>`;
       } finally {
         isLoading.value = false;
@@ -100,7 +110,7 @@ export default {
     };
 
     onMounted(() => {
-      loadMarkdownFile();
+      loadHtmlFile();
     });
 
     return {
@@ -282,6 +292,4 @@ export default {
 .article-content th {
   background-color: #f6f8fa;
 }
-
-
 </style>

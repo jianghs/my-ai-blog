@@ -1,0 +1,129 @@
+<h2>引言</h2>
+<p>数据可视化是数据分析的重要组成部分，它可以帮助我们更直观地理解数据。本文将介绍如何使用 Python 的 <code>matplotlib</code> 和 <code>seaborn</code> 库进行数据可视化。</p>
+<h2>环境准备</h2>
+<p>在开始之前，请确保已安装以下库：</p>
+<ul>
+<li>Python 3.8 或更高版本</li>
+<li><code>matplotlib</code>（用于基本绘图）</li>
+<li><code>seaborn</code>（用于高级可视化）</li>
+</ul>
+<p>可以通过以下命令安装：</p>
+<pre><code class="language-bash">pip install matplotlib seaborn
+</code></pre>
+<h2>基本绘图</h2>
+<p><code>matplotlib</code> 是 Python 中最常用的绘图库。它提供了丰富的绘图功能，包括线图、散点图、柱状图等。</p>
+<h3>导入库</h3>
+<p>首先，导入 <code>matplotlib</code> 库：</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+</code></pre>
+<h3>绘制线图</h3>
+<p>绘制线图的基本步骤如下：</p>
+<ol>
+<li>准备数据</li>
+<li>创建图形对象</li>
+<li>绘制线图</li>
+<li>添加标签和标题</li>
+<li>显示图形</li>
+</ol>
+<p>下面是一个简单的示例：</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+# 准备数据
+x = [1, 2, 3, 4, 5]
+y = [1, 4, 9, 16, 25]
+# 创建图形对象
+fig, ax = plt.subplots()
+# 绘制线图
+ax.plot(x, y)
+# 添加标签和标题
+ax.set_xlabel(&#39;X&#39;)
+ax.set_ylabel(&#39;Y&#39;)
+ax.set_title(&#39;Line Plot&#39;)
+# 显示图形
+plt.show()
+</code></pre>
+<h3>绘制散点图</h3>
+<p>绘制散点图的基本步骤与线图类似，只需将 <code>plot</code> 方法替换为 <code>scatter</code> 方法即可。</p>
+<p>下面是一个示例：</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt
+# 准备数据
+x = [1, 2, 3, 4, 5]
+y = [1, 4, 9, 16, 25]
+# 创建图形对象
+fig, ax = plt.subplots()
+# 绘制散点图
+ax.scatter(x, y)
+# 添加标签和标题
+ax.set_xlabel(&#39;X&#39;)
+ax.set_ylabel(&#39;Y&#39;)
+ax.set_title(&#39;Scatter Plot&#39;)
+# 显示图形
+plt.show()
+</code></pre>
+<h2>高级可视化</h2>
+<p><code>seaborn</code> 是基于 <code>matplotlib</code> 的高级可视化库，提供了更丰富的绘图功能。</p>
+<h3>导入库</h3>
+<p>首先，导入 <code>seaborn</code> 库：</p>
+<pre><code class="language-python">import seaborn as sns
+</code></pre>
+<h3>绘制柱状图</h3>
+<p>绘制柱状图的基本步骤与前面类似，只需将 <code>plot</code> 方法替换为 <code>bar</code> 方法即可。
+下面是一个示例：</p>
+<pre><code class="language-python">import seaborn as sns
+# 准备数据
+x = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;]
+y = [1, 4, 9, 16, 25]
+# 创建图形对象
+fig, ax = plt.subplots()
+# 绘制柱状图
+sns.barplot(x=x, y=y, ax=ax)
+# 添加标签和标题
+ax.set_xlabel(&#39;X&#39;)
+ax.set_ylabel(&#39;Y&#39;)
+ax.set_title(&#39;Bar Plot&#39;)
+# 显示图形
+plt.show()
+</code></pre>
+<h3>一个表格</h3>
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>年龄</th>
+<th>性别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>张三</td>
+<td>18</td>
+<td>男</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>20</td>
+<td>女</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>22</td>
+<td>男</td>
+</tr>
+</tbody></table>
+<h3>javascript代码</h3>
+<pre><code class="language-javascript">function add(a, b) {
+    return a + b;
+}
+</code></pre>
+<h3>java代码</h3>
+<pre><code class="language-java">public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, World!&quot;);
+    }
+}
+</code></pre>
+<h3>shell代码</h3>
+<pre><code class="language-shell">echo &quot;Hello, World!&quot;
+</code></pre>
+<h3>一个图片</h3>
+<p><img src="!%5B%E5%9B%BE%E7%89%87%5D(./%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-09-19%20150006.png" alt="图片"></p>
+<h2>结论</h2>
+<p>本文介绍了如何使用 Python 的 <code>matplotlib</code> 和 <code>seaborn</code> 库进行数据可视化。通过基本绘图和高级可视化，我们可以更直观地理解数据。希望本文对您有所帮助！</p>
